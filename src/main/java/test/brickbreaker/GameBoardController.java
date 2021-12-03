@@ -1,0 +1,171 @@
+package test.brickbreaker;
+
+import javafx.animation.AnimationTimer;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class GameBoardController implements Initializable {
+
+    private Ball ball;
+    private ArrayList<Rectangle> bricks = new ArrayList<>();
+    private boolean paused = false;
+
+    @FXML
+    private Circle circle;
+
+    @FXML
+    private AnchorPane scene;
+
+    @FXML
+    private Rectangle paddle;
+
+    private final BooleanProperty aPressed = new SimpleBooleanProperty();
+    private final BooleanProperty dPressed = new SimpleBooleanProperty();
+    private final BooleanProperty qPressed = new SimpleBooleanProperty();
+    private final BooleanProperty wPressed = new SimpleBooleanProperty();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        timer.start();
+        key_input_Setup();
+        ball = new Ball(scene, circle, paddle);
+        GenerateBrick();
+    }
+
+    public void GenerateBrick() {
+
+        int k = 0;
+        Color color = Color.LIMEGREEN;
+        for (int i = 0; i<1;i++){//change to 1 for debug. Release version will be 3.
+            for (int j = 0; j<10;j++){
+                Rectangle rectangle = new Rectangle((j*128),k,128,30);
+                rectangle.setFill(color);
+                scene.getChildren().add(rectangle);
+                bricks.add(rectangle);
+            }
+            k+=30;
+        }
+    }
+
+    public boolean CheckBrickCollision(Rectangle brick) {
+        if (circle.getBoundsInParent().intersects(brick.getBoundsInParent())){
+            boolean rightBorder = circle.getLayoutX() >= ((brick.getX() + brick.getWidth()) - circle.getRadius());
+            boolean leftBorder = circle.getLayoutX() <= (brick.getX() + circle.getRadius());
+            boolean bottomBorder = circle.getLayoutY() >= ((brick.getY() + brick.getHeight()) - circle.getRadius());
+            boolean topBorder = circle.getLayoutY() <= (brick.getY() + circle.getRadius());
+
+            if (rightBorder || leftBorder) {
+                ball.reverse_x();
+            }
+            if (bottomBorder || topBorder) {
+                ball.reverse_y();
+            }
+            scene.getChildren().remove(brick);
+
+            return true;
+        }
+        return false;
+    }
+
+    AnimationTimer timer = new AnimationTimer() {
+
+        @Override
+        public void handle(long timestamp) {
+
+            int paddle_movement = 6;
+            if(aPressed.get()){
+                if(paddle.getLayoutX() > 0) {
+                    paddle.setLayoutX(paddle.getLayoutX() - paddle_movement);
+                }
+            }
+
+            if(dPressed.get()){
+                if(paddle.getLayoutX() < 1080) {
+                    paddle.setLayoutX(paddle.getLayoutX() + paddle_movement);
+                }
+            }
+
+            if(wPressed.get()){
+                ball.move();
+            }
+
+            if(qPressed.get()){
+                paused();
+            }
+
+            if (!bricks.isEmpty()){
+                bricks.removeIf(brick -> CheckBrickCollision(brick));
+            } else {
+                System.out.println("No more brick");
+                timer.stop();
+            }
+        }
+    };
+
+    public void key_input_Setup(){
+        scene.setOnKeyPressed(e -> {
+            if(e.getCode() == KeyCode.A) {
+                aPressed.set(true);
+            }
+
+            if(e.getCode() == KeyCode.D) {
+                dPressed.set(true);
+            }
+
+            if(e.getCode() == KeyCode.W) {
+                wPressed.set(true);
+            }
+
+            if(e.getCode() == KeyCode.Q) {
+                paused();
+            }
+        });
+
+        scene.setOnKeyReleased(e ->{
+            if(e.getCode() == KeyCode.A) {
+                aPressed.set(false);
+            }
+
+            if(e.getCode() == KeyCode.D) {
+                dPressed.set(false);
+            }
+
+            if(e.getCode() == KeyCode.W) {
+                wPressed.set(true);
+            }
+        });
+    }
+
+    public void paused() {
+
+        paused = !paused;
+        if(paused) {
+            timer.stop();
+            System.out.println("Game paused");
+        } else {
+            timer.start();
+            System.out.println("Game resume");
+        }
+    }
+
+
+
+}
