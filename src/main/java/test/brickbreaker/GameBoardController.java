@@ -26,6 +26,7 @@ public class GameBoardController implements Initializable {
     private Ball ball;
     private ArrayList<Rectangle> bricks = new ArrayList<>();
     private boolean paused = false;
+    private int level = 1;
 
     @FXML
     private Circle circle;
@@ -35,6 +36,12 @@ public class GameBoardController implements Initializable {
 
     @FXML
     private Rectangle paddle;
+
+    @FXML
+    private Label label;
+
+    @FXML
+    private Button Next_level;
 
     private final BooleanProperty aPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
@@ -54,6 +61,13 @@ public class GameBoardController implements Initializable {
 
         int k = 0;
         Color color = Color.LIMEGREEN;
+        if (level == 1) {
+            color = Color.RED;
+        } else if (level == 2) {
+            color = Color.ORANGE;
+        } else if (level == 3) {
+            color = Color.LIMEGREEN;
+        }
         for (int i = 0; i<1;i++){//change to 1 for debug. Release version will be 3.
             for (int j = 0; j<10;j++){
                 Rectangle rectangle = new Rectangle((j*128),k,128,30);
@@ -116,9 +130,23 @@ public class GameBoardController implements Initializable {
             } else {
                 System.out.println("No more brick");
                 timer.stop();
+                label.setVisible(true);
+                Next_level.setVisible(true);
             }
         }
     };
+
+    public void NextLevel(ActionEvent event) {
+        paused();
+        circle.setLayoutX(640);
+        circle.setLayoutY(180);
+        System.out.println("Level Clear");
+        bricks.clear();
+        level++;
+        GenerateBrick();
+        label.setVisible(false);
+        Next_level.setVisible(false);
+    }
 
     public void key_input_Setup(){
         scene.setOnKeyPressed(e -> {
