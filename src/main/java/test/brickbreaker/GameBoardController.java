@@ -132,6 +132,9 @@ public class GameBoardController implements Initializable {
                 timer.stop();
                 label.setVisible(true);
                 Next_level.setVisible(true);
+                if(level == 3) {
+                    GameOver();
+                }
             }
         }
     };
@@ -194,6 +197,17 @@ public class GameBoardController implements Initializable {
         }
     }
 
-
+    public void GameOver() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("GameOver.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) this.scene.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
