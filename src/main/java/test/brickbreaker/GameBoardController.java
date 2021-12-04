@@ -22,11 +22,16 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable {
+    //today goal
+    //ball count
+    //extra
+    //check game feature note
 
     private Ball ball;
     private ArrayList<Rectangle> bricks = new ArrayList<>();
     private boolean paused = false;
     private int level = 1;
+    private int ball_count = 3;
 
     @FXML
     private Circle circle;
@@ -45,15 +50,14 @@ public class GameBoardController implements Initializable {
 
     private final BooleanProperty aPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
-    private final BooleanProperty qPressed = new SimpleBooleanProperty();
-    private final BooleanProperty wPressed = new SimpleBooleanProperty();
+    private Boolean wPressed = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         timer.start();
         key_input_Setup();
-        ball = new Ball(scene, circle, paddle);
+        ball = new Ball(circle);
         GenerateBrick();
     }
 
@@ -113,6 +117,19 @@ public class GameBoardController implements Initializable {
         @Override
         public void handle(long timestamp) {
 
+            ball.checkCollisionScene();
+            ball.checkCollisionPaddle(paddle);
+            if (ball.checkCollisionBottomZone()) {
+                ball.moving(false);
+                wPressed = false;
+                ball_count--;
+                paddle.setLayoutX(535);
+                System.out.println(ball_count);
+                if (ball_count == 0) {
+                    GameOver();
+                }
+            }
+
             int paddle_movement = 6;
             if(aPressed.get()){
                 if(paddle.getLayoutX() > 0) {
@@ -126,12 +143,8 @@ public class GameBoardController implements Initializable {
                 }
             }
 
-            if(wPressed.get()){
-                ball.move();
-            }
-
-            if(qPressed.get()){
-                paused();
+            if(wPressed){
+                ball.moving(true);
             }
 
             if (!bricks.isEmpty()){
@@ -145,6 +158,7 @@ public class GameBoardController implements Initializable {
                     GameOver();
                 }
             }
+
         }
     };
 
@@ -171,7 +185,7 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.W) {
-                wPressed.set(true);
+                wPressed = true;
             }
 
             if(e.getCode() == KeyCode.Q) {
@@ -189,7 +203,6 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.W) {
-                wPressed.set(true);
             }
         });
     }
