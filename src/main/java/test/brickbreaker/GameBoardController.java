@@ -29,6 +29,7 @@ public class GameBoardController implements Initializable {
     private int level = 1;//3 for debugging. release is 1
     private int ball_count = 3;
     private int score = 0;
+    private boolean blitz_mode = false;
 
     @FXML
     private Circle circle;
@@ -61,7 +62,7 @@ public class GameBoardController implements Initializable {
     public void GenerateBrick() {
 
         int k = 0;
-        Color color = Color.LIMEGREEN;
+        Color color = Color.LIMEGREEN;//Red for debugging.release is limegreen
         if (level == 1) {
             color = Color.RED;
         } else if (level == 2) {
@@ -69,7 +70,7 @@ public class GameBoardController implements Initializable {
         } else if (level == 3) {
             color = Color.LIMEGREEN;//Red for debugging.release is limegreen
         }
-        for (int i = 0; i<1;i++){//set to 1 for debugging. Release version is 3
+        for (int i = 0; i<1;i++){//1 for debugging. Release is 3
             for (int j = 0; j<10;j++){
                 Rectangle rectangle = new Rectangle((j*128),k,128,30);
                 rectangle.setFill(color);
@@ -141,7 +142,7 @@ public class GameBoardController implements Initializable {
             }
 
             if(dPressed.get() && wPressed){
-                if(paddle.getLayoutX() < 1080) {
+                if(paddle.getLayoutX() < (1280 - paddle.getWidth())) {
                     paddle.setLayoutX(paddle.getLayoutX() + paddle_movement);
                 }
             }
@@ -157,16 +158,19 @@ public class GameBoardController implements Initializable {
                 wPressed = false;
                 label.setVisible(true);
                 Next_level.setVisible(true);
-                if(level == 3) {
-                    GameOver();
-                    timer.stop();//patch for keep loading game over scene
+                if(level >= 3) {
+                    blitz_mode = true;
                 }
             }
-
         }
     };
 
     public void NextLevel(ActionEvent event) {
+        if (blitz_mode) {
+            if (paddle.getWidth() > 110) {
+                paddle.setWidth(paddle.getWidth() - 20);
+            }
+        }
         ball.moving(false);
         circle.setLayoutX(640);
         circle.setLayoutY(686);//180 for debugging. release is 686
