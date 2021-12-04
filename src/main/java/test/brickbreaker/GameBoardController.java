@@ -26,7 +26,7 @@ public class GameBoardController implements Initializable {
     private Ball ball;
     private ArrayList<Rectangle> bricks = new ArrayList<>();
     private boolean paused = false;
-    private int level = 3;//set to 3. release is 1
+    private int level = 1;//3 for debugging. release is 1
     private int ball_count = 3;
     private int score = 0;
 
@@ -67,7 +67,7 @@ public class GameBoardController implements Initializable {
         } else if (level == 2) {
             color = Color.ORANGE;
         } else if (level == 3) {
-            color = Color.RED;//set to red.release is limegreen
+            color = Color.LIMEGREEN;//Red for debugging.release is limegreen
         }
         for (int i = 0; i<1;i++){//set to 1 for debugging. Release version is 3
             for (int j = 0; j<10;j++){
@@ -169,7 +169,7 @@ public class GameBoardController implements Initializable {
     public void NextLevel(ActionEvent event) {
         ball.moving(false);
         circle.setLayoutX(640);
-        circle.setLayoutY(180);//set to 180. release is 686
+        circle.setLayoutY(686);//180 for debugging. release is 686
         bricks.clear();
         level++;
         GenerateBrick();

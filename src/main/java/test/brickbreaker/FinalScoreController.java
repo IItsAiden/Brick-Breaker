@@ -6,12 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -21,6 +21,10 @@ public class FinalScoreController implements Initializable {
 
     ArrayList<String> list = new ArrayList<String>();
     private int score;
+    private boolean save = false;
+
+    @FXML
+    private Button button;
 
     @FXML
     private ListView<String> listView;
@@ -28,16 +32,27 @@ public class FinalScoreController implements Initializable {
     @FXML
     private Label label;
 
-    void get_score(Integer score) {
-        this.score = score;
-        label.setText(score.toString());
-    }
+    @FXML
+    private Label nice;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         Leaderboard();
         System.out.println(list);
         listView.getItems().addAll(list);
+    }
+
+    void get_score(Integer score, Boolean save) {
+
+        this.score = score;
+        this.save = save;
+        label.setText(score.toString());
+        if (save) {
+
+            button.setText("Save");
+            nice.setText("Congraz!! New High Score!");
+        }
     }
 
     public void Leaderboard() {
@@ -48,7 +63,7 @@ public class FinalScoreController implements Initializable {
             } else {
                 Scanner myReader = new Scanner(myObj);
                 System.out.println("Leaderboard:");
-                while (myReader.hasNextLine()) {
+                while (myReader.hasNext()) {
                     list.add(myReader.next());
                 }
                 myReader.close();
@@ -61,11 +76,31 @@ public class FinalScoreController implements Initializable {
 
     public void Next(ActionEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        if (save) {
+
+            try {
+                PrintWriter myWriter = new PrintWriter(new FileWriter("Leaderboard.txt", true));
+                myWriter.println(score);
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+            FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } else {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }
     }
 }

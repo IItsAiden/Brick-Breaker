@@ -12,7 +12,7 @@
                 <Font size="54.0" />
             </font>
         </Label>
-        <Button layoutX="616.0" layoutY="386.0" mnemonicParsing="false" onAction="#Home" text="Home" />
+        <Button layoutX="616.0" layoutY="386.0" mnemonicParsing="false" onAction="#Home" text="Next" />
       <Label fx:id="label" layoutX="641.0" layoutY="291.0">
          <font>
             <Font size="36.0" />
