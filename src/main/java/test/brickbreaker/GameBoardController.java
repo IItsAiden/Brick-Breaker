@@ -92,9 +92,18 @@ public class GameBoardController implements Initializable {
             if (bottomBorder || topBorder) {
                 ball.reverse_y();
             }
-            scene.getChildren().remove(brick);
 
-            return true;
+            switch (getBrickState(brick)) {
+                case 3:
+                    brick.setFill(Color.ORANGE);
+                    break;
+                case 2:
+                    brick.setFill(Color.RED);
+                    break;
+                case 1:
+                    scene.getChildren().remove(brick);
+                    return true;
+            }
         }
         return false;
     }
@@ -210,4 +219,11 @@ public class GameBoardController implements Initializable {
         }
     }
 
+    public int  getBrickState(Rectangle brick) {
+        int HP = 3;
+        if(brick.getFill() == Color.LIMEGREEN) HP = 3;
+        else if (brick.getFill() == Color.ORANGE) HP = 2;
+        else if (brick.getFill() == Color.RED) HP = 1;
+        return HP;
+    }
 }
