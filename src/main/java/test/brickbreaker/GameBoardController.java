@@ -131,13 +131,13 @@ public class GameBoardController implements Initializable {
             }
 
             int paddle_movement = 6;
-            if(aPressed.get()){
+            if(aPressed.get() && wPressed){
                 if(paddle.getLayoutX() > 0) {
                     paddle.setLayoutX(paddle.getLayoutX() - paddle_movement);
                 }
             }
 
-            if(dPressed.get()){
+            if(dPressed.get() && wPressed){
                 if(paddle.getLayoutX() < 1080) {
                     paddle.setLayoutX(paddle.getLayoutX() + paddle_movement);
                 }
