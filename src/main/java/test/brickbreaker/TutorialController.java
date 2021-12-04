@@ -8,11 +8,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HomeMenuController {
+public class TutorialController {
 
-    public void start(ActionEvent event) throws IOException {
+    public void Start(ActionEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("Tutorial.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("GameBoard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
