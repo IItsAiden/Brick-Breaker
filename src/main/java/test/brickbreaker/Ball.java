@@ -23,7 +23,7 @@ public class Ball {
     public void checkCollisionScene(){
         boolean rightBorder = ball.getLayoutX() >= (1280 - ball.getRadius());
         boolean leftBorder = ball.getLayoutX() <= (0 + ball.getRadius());
-        boolean bottomBorder = ball.getLayoutY() >= (720 - ball.getRadius());//set to 200 for debugging.Release version is 720
+        boolean bottomBorder = ball.getLayoutY() >= (200 - ball.getRadius());//set to 200 for debugging.Release version is 720
         boolean topBorder = ball.getLayoutY() <= (0 + ball.getRadius());
 
         if (rightBorder || leftBorder) {
