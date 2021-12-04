@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,7 +17,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -30,6 +28,7 @@ public class GameBoardController implements Initializable {
     private boolean paused = false;
     private int level = 1;
     private int ball_count = 3;
+    private int score = 0;
 
     @FXML
     private Circle circle;
@@ -70,7 +69,7 @@ public class GameBoardController implements Initializable {
         } else if (level == 3) {
             color = Color.LIMEGREEN;
         }
-        for (int i = 0; i<1;i++){//change to 1 for debug. Release version will be 3.
+        for (int i = 0; i<1;i++){//set to 1 for debugging. Release version is 3
             for (int j = 0; j<10;j++){
                 Rectangle rectangle = new Rectangle((j*128),k,128,30);
                 rectangle.setFill(color);
@@ -98,12 +97,18 @@ public class GameBoardController implements Initializable {
             switch (getBrickState(brick)) {
                 case 3:
                     brick.setFill(Color.ORANGE);
+                    score++;
+                    System.out.println("Score:" + score);
                     break;
                 case 2:
                     brick.setFill(Color.RED);
+                    score++;
+                    System.out.println("Score:" + score);
                     break;
                 case 1:
                     scene.getChildren().remove(brick);
+                    score++;
+                    System.out.println("Score:" + score);
                     return true;
             }
         }
@@ -122,7 +127,7 @@ public class GameBoardController implements Initializable {
                 wPressed = false;
                 ball_count--;
                 paddle.setLayoutX(535);
-                System.out.println(ball_count);
+                System.out.println("health: " + ball_count);
                 if (ball_count == 0) {
                     GameOver();
                 }
@@ -148,8 +153,8 @@ public class GameBoardController implements Initializable {
             if (!bricks.isEmpty()){
                 bricks.removeIf(brick -> CheckBrickCollision(brick));
             } else {
-                System.out.println("No more brick");
-                timer.stop();
+                ball.moving(false);
+                wPressed = false;
                 label.setVisible(true);
                 Next_level.setVisible(true);
                 if(level == 3) {
@@ -161,10 +166,9 @@ public class GameBoardController implements Initializable {
     };
 
     public void NextLevel(ActionEvent event) {
-        paused();
+        ball.moving(false);
         circle.setLayoutX(640);
         circle.setLayoutY(180);
-        System.out.println("Level Clear");
         bricks.clear();
         level++;
         GenerateBrick();
@@ -222,6 +226,8 @@ public class GameBoardController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("GameOver.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) this.scene.getScene().getWindow();
+            GameOverController controller = fxmlLoader.getController();
+            controller.high_score(score);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();

@@ -1,16 +1,14 @@
 package test.brickbreaker;
 
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class Ball {
     private final Circle ball;
-    private int velocity_x = 3;
-    private int velocity_y = 3;
+    private int velocity_x = 3;//4
+    private int velocity_y = 5;//3
 
     public Ball(Circle ball) {
-
         this.ball = ball;
     }
 
@@ -25,7 +23,7 @@ public class Ball {
     public void checkCollisionScene(){
         boolean rightBorder = ball.getLayoutX() >= (1280 - ball.getRadius());
         boolean leftBorder = ball.getLayoutX() <= (0 + ball.getRadius());
-        boolean bottomBorder = ball.getLayoutY() >= (720 - ball.getRadius());
+        boolean bottomBorder = ball.getLayoutY() >= (720 - ball.getRadius());//set to 200 for debugging.Release version is 720
         boolean topBorder = ball.getLayoutY() <= (0 + ball.getRadius());
 
         if (rightBorder || leftBorder) {
@@ -57,7 +55,7 @@ public class Ball {
     public Boolean checkCollisionBottomZone(){
         if(ball.getLayoutY() >= (720 - ball.getRadius())){
             ball.setLayoutX(640);
-            ball.setLayoutY(686);
+            ball.setLayoutY(175);//set to 175 for debugging.Release version is 686
             return true;
         }
         return false;

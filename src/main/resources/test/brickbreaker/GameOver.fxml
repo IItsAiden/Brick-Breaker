@@ -13,5 +13,14 @@
             </font>
         </Label>
         <Button layoutX="616.0" layoutY="386.0" mnemonicParsing="false" onAction="#Home" text="Home" />
+      <Label fx:id="label" layoutX="641.0" layoutY="291.0">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <Label layoutX="434.0" layoutY="291.0" text="High Score:">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
