@@ -177,13 +177,13 @@ public class GameBoardController implements Initializable {
 
     public void NextLevel(ActionEvent event) {
         if (blitz_mode) {
-            if (paddle.getWidth() > 110) {
+            if (paddle.getWidth() > 90) {
                 paddle.setWidth(paddle.getWidth() - 20);
             }
         }
         ball.moving(false);
         circle.setLayoutX(320);
-        circle.setLayoutY(693);//180 for debugging. release is 686
+        circle.setLayoutY(693);//180 for debugging. release is 693
         paddle.setLayoutX(320 - paddle.getWidth()/2);
         bricks.clear();
         level++;
@@ -274,12 +274,12 @@ public class GameBoardController implements Initializable {
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
             case 2:
-                paddle.setWidth(250);
+                paddle.setWidth(240);
                 multiplier = 50;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
             case 3:
-                paddle.setWidth(210);
+                paddle.setWidth(180);
                 multiplier = 100;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
@@ -289,7 +289,7 @@ public class GameBoardController implements Initializable {
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
             case 5:
-                paddle.setWidth(110);
+                paddle.setWidth(120);
                 multiplier = 200;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
