@@ -28,10 +28,10 @@ public class GameBoardController implements Initializable {
     private boolean paused = false;
     private int level = 1;//3 for debugging. release is 1
     private int ball_count = 3;
-    private double score = 0;
+    private int score = 0;
     private boolean blitz_mode = false;
     private int choice;
-    private double multiplier = 1;
+    private int multiplier = 1;
     private int velocity_x;
     private int velocity_y;
 
@@ -103,17 +103,17 @@ public class GameBoardController implements Initializable {
             switch (getBrickState(brick)) {
                 case 3:
                     brick.setFill(Color.ORANGE);
-                    score = score + (1*multiplier);
+                    score = score + multiplier;
                     System.out.println("Score:" + score);
                     break;
                 case 2:
                     brick.setFill(Color.RED);
-                    score = score + (1*multiplier);
+                    score = score + multiplier;
                     System.out.println("Score:" + score);
                     break;
                 case 1:
                     scene.getChildren().remove(brick);
-                    score = score + (1*multiplier);
+                    score = score + multiplier;
                     System.out.println("Score:" + score);
                     return true;
             }
@@ -270,27 +270,27 @@ public class GameBoardController implements Initializable {
         switch (choice) {
             case 1:
                 paddle.setWidth(390);
-                multiplier = 0.25;
+                multiplier = 25;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
             case 2:
                 paddle.setWidth(250);
-                multiplier = 0.75;
+                multiplier = 50;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
             case 3:
                 paddle.setWidth(210);
-                multiplier = 1;
+                multiplier = 100;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
             case 4:
                 paddle.setWidth(150);
-                multiplier = 1.5;
+                multiplier = 150;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
             case 5:
                 paddle.setWidth(110);
-                multiplier = 2;
+                multiplier = 200;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
         }
