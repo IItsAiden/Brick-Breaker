@@ -22,6 +22,16 @@ public class HomeMenuController {
         stage.show();
     }
 
+    public void leaderboard(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("Leaderboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
+
     public void exit(ActionEvent event) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

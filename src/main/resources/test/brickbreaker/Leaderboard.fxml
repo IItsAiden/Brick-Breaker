@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.LeaderboardController">
+   <children>
+      <ListView fx:id="listView" layoutX="220.0" layoutY="238.0" prefHeight="238.0" prefWidth="200.0" />
+      <Button layoutX="285.0" layoutY="596.0" mnemonicParsing="false" onAction="#back" text="Back">
+         <font>
+            <Font size="21.0" />
+         </font></Button>
+      <Label layoutX="234.0" layoutY="50.0" text="TOP 10">
+         <font>
+            <Font size="54.0" />
+         </font></Label>
+      <Label layoutX="140.0" layoutY="130.0" text="LEADERBOARD">
+         <font>
+            <Font size="54.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
