@@ -5,19 +5,44 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.DifficultyController">
    <children>
-      <Label layoutX="276.0" layoutY="41.0" text="Choose Difficulty" />
-      <RadioButton fx:id="rb3" layoutX="125.0" layoutY="248.0" mnemonicParsing="false" onAction="#get_difficulty" selected="true" text="Normal">
+      <Label layoutX="118.0" layoutY="50.0" text="Choose Difficulty">
+         <font>
+            <Font size="54.0" />
+         </font></Label>
+      <RadioButton fx:id="rb3" layoutX="60.0" layoutY="330.0" mnemonicParsing="false" onAction="#get_difficulty" selected="true" text="Normal">
          <toggleGroup>
             <ToggleGroup fx:id="Difficulty" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="rb4" layoutX="124.0" layoutY="291.0" mnemonicParsing="false" onAction="#get_difficulty" text="Hard" toggleGroup="$Difficulty" />
-      <RadioButton fx:id="rb2" layoutX="125.0" layoutY="186.0" mnemonicParsing="false" onAction="#get_difficulty" text="Easy" toggleGroup="$Difficulty" />
-      <Label fx:id="label" layoutX="474.0" layoutY="139.0" text="Description" />
-      <RadioButton fx:id="rb1" layoutX="125.0" layoutY="122.0" mnemonicParsing="false" onAction="#get_difficulty" text="Kid Mode" toggleGroup="$Difficulty" />
-      <RadioButton fx:id="rb5" layoutX="128.0" layoutY="352.0" mnemonicParsing="false" onAction="#get_difficulty" text="Insane" toggleGroup="$Difficulty" />
-      <Button layoutX="300.0" layoutY="625.0" mnemonicParsing="false" onAction="#next" text="Next" />
+         </toggleGroup>
+         <font>
+            <Font size="21.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="rb4" layoutX="60.0" layoutY="420.0" mnemonicParsing="false" onAction="#get_difficulty" text="Hard" toggleGroup="$Difficulty">
+         <font>
+            <Font size="21.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="rb2" layoutX="60.0" layoutY="240.0" mnemonicParsing="false" onAction="#get_difficulty" text="Easy" toggleGroup="$Difficulty">
+         <font>
+            <Font size="21.0" />
+         </font></RadioButton>
+      <Label fx:id="label" layoutX="357.0" layoutY="184.0" text="Description">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <RadioButton fx:id="rb1" layoutX="60.0" layoutY="150.0" mnemonicParsing="false" onAction="#get_difficulty" text="Kid Mode" toggleGroup="$Difficulty">
+         <font>
+            <Font size="21.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="rb5" layoutX="60.0" layoutY="510.0" mnemonicParsing="false" onAction="#get_difficulty" text="Insane" toggleGroup="$Difficulty">
+         <font>
+            <Font size="21.0" />
+         </font></RadioButton>
+      <Button layoutX="285.0" layoutY="630.0" mnemonicParsing="false" onAction="#next" text="Next">
+         <font>
+            <Font size="21.0" />
+         </font></Button>
    </children>
 </AnchorPane>
