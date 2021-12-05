@@ -5,8 +5,8 @@ import javafx.scene.shape.Rectangle;
 
 public class Ball {
     private final Circle ball;
-    private int velocity_x;//3 for debugging.release is 4
-    private int velocity_y;//5 for debugging.release is 3
+    private int velocity_x;
+    private int velocity_y;
 
     public Ball(Circle ball) {
         this.ball = ball;
@@ -55,7 +55,7 @@ public class Ball {
     public Boolean checkCollisionBottomZone(){
         if(ball.getLayoutY() >= (720 - ball.getRadius())){
             ball.setLayoutX(320);
-            ball.setLayoutY(693);//175 for debugging.Release is 693
+            ball.setLayoutY(693);
             return true;
         }
         return false;
@@ -71,6 +71,5 @@ public class Ball {
     public void get_ball_movement(Integer velocity) {
         velocity_x = velocity + 1;
         velocity_y = velocity;
-
     }
 }
