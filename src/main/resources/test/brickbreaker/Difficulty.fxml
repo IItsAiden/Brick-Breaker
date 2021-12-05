@@ -6,18 +6,18 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.DifficultyController">
+<AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.DifficultyController">
    <children>
-      <Label layoutX="595.0" layoutY="70.0" text="Choose Difficulty" />
-      <RadioButton fx:id="rb3" layoutX="294.0" layoutY="301.0" mnemonicParsing="false" onAction="#get_difficulty" text="Normal">
+      <Label layoutX="276.0" layoutY="41.0" text="Choose Difficulty" />
+      <RadioButton fx:id="rb3" layoutX="125.0" layoutY="248.0" mnemonicParsing="false" onAction="#get_difficulty" selected="true" text="Normal">
          <toggleGroup>
             <ToggleGroup fx:id="Difficulty" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="rb4" layoutX="301.0" layoutY="352.0" mnemonicParsing="false" onAction="#get_difficulty" text="Hard" toggleGroup="$Difficulty" />
-      <RadioButton fx:id="rb2" layoutX="302.0" layoutY="222.0" mnemonicParsing="false" onAction="#get_difficulty" text="Easy" toggleGroup="$Difficulty" />
-      <Label fx:id="label" layoutX="946.0" layoutY="252.0" text="Description" />
-      <RadioButton fx:id="rb1" layoutX="274.0" layoutY="115.0" mnemonicParsing="false" onAction="#get_difficulty" text="Kid Mode" toggleGroup="$Difficulty" />
-      <RadioButton fx:id="rb5" layoutX="268.0" layoutY="501.0" mnemonicParsing="false" onAction="#get_difficulty" text="Insane" toggleGroup="$Difficulty" />
-      <Button layoutX="951.0" layoutY="602.0" mnemonicParsing="false" onAction="#next" text="Next" />
+      <RadioButton fx:id="rb4" layoutX="124.0" layoutY="291.0" mnemonicParsing="false" onAction="#get_difficulty" text="Hard" toggleGroup="$Difficulty" />
+      <RadioButton fx:id="rb2" layoutX="125.0" layoutY="186.0" mnemonicParsing="false" onAction="#get_difficulty" text="Easy" toggleGroup="$Difficulty" />
+      <Label fx:id="label" layoutX="474.0" layoutY="139.0" text="Description" />
+      <RadioButton fx:id="rb1" layoutX="125.0" layoutY="122.0" mnemonicParsing="false" onAction="#get_difficulty" text="Kid Mode" toggleGroup="$Difficulty" />
+      <RadioButton fx:id="rb5" layoutX="128.0" layoutY="352.0" mnemonicParsing="false" onAction="#get_difficulty" text="Insane" toggleGroup="$Difficulty" />
+      <Button layoutX="300.0" layoutY="625.0" mnemonicParsing="false" onAction="#next" text="Next" />
    </children>
 </AnchorPane>

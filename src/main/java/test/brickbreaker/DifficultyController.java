@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class DifficultyController {
 
-    private int choice = 2;
+    private int choice = 3;
 
     @FXML
     private RadioButton rb1, rb2, rb3, rb4, rb5;
@@ -51,6 +51,7 @@ public class DifficultyController {
         Scene scene = new Scene(fxmlLoader.load());
         TutorialController controller = fxmlLoader.getController();
         controller.get_choice(choice);
+        System.out.println(choice);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
