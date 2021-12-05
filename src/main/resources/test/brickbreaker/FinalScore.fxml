@@ -16,7 +16,7 @@
          <font>
             <Font size="21.0" />
          </font></Button>
-      <ListView fx:id="listView" layoutX="193.0" layoutY="271.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="listView" layoutX="209.0" layoutY="242.0" prefHeight="237.0" prefWidth="200.0" />
       <Label layoutX="179.0" layoutY="541.0" text="Your Score:" />
       <Label fx:id="label" layoutX="392.0" layoutY="541.0" prefHeight="17.0" prefWidth="30.0" text="score" />
       <Label fx:id="nice" layoutX="254.0" layoutY="593.0" text="Try harder next time." />

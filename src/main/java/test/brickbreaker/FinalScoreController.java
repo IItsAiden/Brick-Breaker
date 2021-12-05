@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -39,6 +40,7 @@ public class FinalScoreController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Leaderboard();
+        list.sort(Collections.reverseOrder());
         System.out.println(list);
         listView.getItems().addAll(list);
     }
@@ -58,16 +60,13 @@ public class FinalScoreController implements Initializable {
     public void Leaderboard() {
         try {
             File myObj = new File("Leaderboard.txt");
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
-            } else {
-                Scanner myReader = new Scanner(myObj);
-                System.out.println("Leaderboard:");
-                while (myReader.hasNext()) {
-                    list.add(myReader.next());
-                }
-                myReader.close();
+            int counter = 0;
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNext() && counter < 10) {
+                list.add(myReader.next());
+                counter++;
             }
+            myReader.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -77,10 +76,13 @@ public class FinalScoreController implements Initializable {
     public void Next(ActionEvent event) throws IOException {
 
         if (save) {
+            add_highscore();
 
             try {
-                PrintWriter myWriter = new PrintWriter(new FileWriter("Leaderboard.txt", true));
-                myWriter.println(score);
+                PrintWriter myWriter = new PrintWriter("Leaderboard.txt");
+                for (String s : list) {
+                    myWriter.println(s);
+                }
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
             } catch (IOException e) {
@@ -102,5 +104,17 @@ public class FinalScoreController implements Initializable {
             stage.setResizable(false);
             stage.show();
         }
+    }
+
+    public void add_highscore() {
+        System.out.println("Final:" + list);
+        for (int i = 0; i < list.size();i ++) {
+            if (score >= Integer.parseInt(list.get(i))) {
+                list.add(i,String.valueOf(score));
+                System.out.println("Yes");
+                break;
+            }
+        }
+
     }
 }

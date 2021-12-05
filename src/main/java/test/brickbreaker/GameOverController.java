@@ -10,7 +10,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -19,6 +21,7 @@ import java.util.Scanner;
 public class GameOverController implements Initializable {
 
     ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> top_ten = new ArrayList<String>();
     private int score;
 
     @FXML
@@ -61,13 +64,17 @@ public class GameOverController implements Initializable {
             File myObj = new File("Leaderboard.txt");
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
-            } else {
-                Scanner myReader = new Scanner(myObj);
-                while (myReader.hasNext()) {
-                    list.add(myReader.next());
-                }
-                myReader.close();
+                PrintWriter myWriter = new PrintWriter(new FileWriter("Leaderboard.txt", true));
+                myWriter.println(0);
+                myWriter.close();
             }
+            int counter = 0;
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNext() && counter < 10) {
+                list.add(myReader.next());
+                counter++;
+            }
+            myReader.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
