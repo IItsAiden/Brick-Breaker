@@ -43,7 +43,7 @@ public class GameBoardController implements Initializable {
     private Rectangle paddle;
 
     @FXML
-    private Label label;
+    private Label label, onscreen_score;
 
     @FXML
     private Button Next_level;
@@ -122,6 +122,8 @@ public class GameBoardController implements Initializable {
 
         @Override
         public void handle(long timestamp) {
+
+            onscreen_score.setText(String.valueOf(score));
 
             switch (choice) {
                 case 1:

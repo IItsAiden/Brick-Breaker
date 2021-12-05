@@ -12,11 +12,21 @@
         <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="9.0" layoutX="530.0" layoutY="697.0" stroke="BLACK" strokeType="INSIDE" width="210.0" />
         <Circle fx:id="circle" fill="DODGERBLUE" layoutX="640.0" layoutY="686.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
         <Button layoutX="576.0" layoutY="-59.0" mnemonicParsing="false" text="Button" />
-      <Label fx:id="label" layoutX="463.0" layoutY="257.0" text="Press W to start">
+      <Label fx:id="label" layoutX="453.0" layoutY="273.0" text="Press W to start">
          <font>
             <Font size="54.0" />
          </font>
       </Label>
       <Button fx:id="Next_level" layoutX="605.0" layoutY="388.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" visible="false" />
+      <Label layoutX="14.0" layoutY="297.0" text="Score:">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="onscreen_score" layoutX="80.0" layoutY="298.0" text="0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
