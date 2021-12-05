@@ -28,5 +28,15 @@
             <Font size="21.0" />
          </font>
       </Label>
+      <Label layoutX="14.0" layoutY="329.0" text="Health:">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="onscreen_health" layoutX="86.0" layoutY="329.0" text="0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
