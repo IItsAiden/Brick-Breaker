@@ -180,6 +180,7 @@ public class GameBoardController implements Initializable {
             } else {
                 ball.moving(false);
                 wPressed = false;
+                label.setText("Level Cleared!");
                 label.setVisible(true);
                 Next_level.setVisible(true);
                 if(level >= 3) {
@@ -201,7 +202,7 @@ public class GameBoardController implements Initializable {
         bricks.clear();
         level++;
         GenerateBrick();
-        label.setVisible(false);
+        label.setText("Press W to start");
         Next_level.setVisible(false);
     }
 
@@ -217,6 +218,7 @@ public class GameBoardController implements Initializable {
 
             if(e.getCode() == KeyCode.W) {
                 wPressed = true;
+                label.setVisible(false);
             }
 
             if(e.getCode() == KeyCode.Q) {
