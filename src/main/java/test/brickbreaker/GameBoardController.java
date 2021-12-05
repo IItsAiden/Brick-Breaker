@@ -243,9 +243,12 @@ public class GameBoardController implements Initializable {
         paused = !paused;
         if(paused) {
             timer.stop();
+            label.setVisible(true);
+            label.setText("Game Paused");
             System.out.println("Game paused");
         } else {
             timer.start();
+            label.setVisible(false);
             System.out.println("Game resume");
         }
     }
