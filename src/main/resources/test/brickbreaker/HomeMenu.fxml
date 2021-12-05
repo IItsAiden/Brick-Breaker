@@ -21,7 +21,7 @@
             <Font size="21.0" />
          </font>
       </Button>
-      <Button layoutX="242.0" layoutY="480.0" mnemonicParsing="false" onAction="#start" prefHeight="53.0" prefWidth="157.0" text="LeaderBoard">
+      <Button layoutX="242.0" layoutY="480.0" mnemonicParsing="false" onAction="#leaderboard" prefHeight="53.0" prefWidth="157.0" text="LeaderBoard">
          <font>
             <Font size="21.0" />
          </font>
