@@ -14,6 +14,7 @@ public class HomeMenu extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Brick Breaker");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
