@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.TutorialController">
+<AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.TutorialController">
    <children>
-      <Button layoutX="610.0" layoutY="381.0" mnemonicParsing="false" onAction="#Start" text="Let's Go!" />
-      <Label layoutX="620.0" layoutY="56.0" text="Tutorial" />
+      <Button layoutX="289.0" layoutY="657.0" mnemonicParsing="false" onAction="#Start" text="Let's Go!" />
+      <Label layoutX="269.0" layoutY="50.0" text="Tutorial" />
    </children>
 </AnchorPane>

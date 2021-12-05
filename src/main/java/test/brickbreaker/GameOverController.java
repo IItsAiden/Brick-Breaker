@@ -18,8 +18,8 @@ import java.util.Scanner;
 
 public class GameOverController implements Initializable {
 
-    private double score;
     ArrayList<String> list = new ArrayList<String>();
+    private double score;
 
     @FXML
     private Label label;
@@ -73,7 +73,7 @@ public class GameOverController implements Initializable {
             e.printStackTrace();
         }
     }
-    //Path can be use here
+    //Patch can be use here
     //Problem with this leaderboard is it will read all list.
     //Our leaderboard must be top 10 only.
     //path to be fix is limit it to 10

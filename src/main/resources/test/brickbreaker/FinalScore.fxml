@@ -5,14 +5,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.FinalScoreController">
+<AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.FinalScoreController">
    <children>
-      <Label layoutX="985.0" layoutY="208.0" text="LEADERBOARD" />
-      <Button fx:id="button" layoutX="313.0" layoutY="295.0" mnemonicParsing="false" onAction="#Next" text="Next" />
-      <ListView fx:id="listView" layoutX="925.0" layoutY="245.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="283.0" layoutY="174.0" text="Your Score:" />
-      <Label fx:id="label" layoutX="363.0" layoutY="174.0" prefHeight="17.0" prefWidth="30.0" text="score" />
-      <Label fx:id="nice" layoutX="279.0" layoutY="245.0" text="Try harder next time." />
-      <Label layoutX="1006.0" layoutY="191.0" text="TOP 10" />
+      <Label layoutX="273.0" layoutY="90.0" text="LEADERBOARD" />
+      <Button fx:id="button" layoutX="293.0" layoutY="665.0" mnemonicParsing="false" onAction="#Next" text="Next" />
+      <ListView fx:id="listView" layoutX="209.0" layoutY="137.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="228.0" layoutY="376.0" text="Your Score:" />
+      <Label fx:id="label" layoutX="339.0" layoutY="376.0" prefHeight="17.0" prefWidth="30.0" text="score" />
+      <Label fx:id="nice" layoutX="254.0" layoutY="467.0" text="Try harder next time." />
+      <Label layoutX="294.0" layoutY="51.0" text="TOP 10" />
    </children>
 </AnchorPane>

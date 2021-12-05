@@ -32,6 +32,8 @@ public class GameBoardController implements Initializable {
     private boolean blitz_mode = false;
     private int choice;
     private double multiplier = 1;
+    private int velocity_x;
+    private int velocity_y;
 
     @FXML
     private Circle circle;
@@ -59,6 +61,7 @@ public class GameBoardController implements Initializable {
         key_input_Setup();
         ball = new Ball(circle);
         GenerateBrick();
+        paddle.setLayoutX(320 - paddle.getWidth()/2);
     }
 
     public void GenerateBrick() {
@@ -72,9 +75,9 @@ public class GameBoardController implements Initializable {
         } else if (level == 3) {
             color = Color.LIMEGREEN;//Red for debugging.release is limegreen
         }
-        for (int i = 0; i<3;i++){//1 for debugging. Release is 3
+        for (int i = 0; i<1;i++){//1 for debugging. Release is 3
             for (int j = 0; j<10;j++){
-                Rectangle rectangle = new Rectangle((j*128),k,128,30);
+                Rectangle rectangle = new Rectangle((j*64),k,63,29);
                 rectangle.setFill(color);
                 scene.getChildren().add(rectangle);
                 bricks.add(rectangle);
@@ -126,35 +129,14 @@ public class GameBoardController implements Initializable {
             onscreen_score.setText(String.valueOf(score));
             onscreen_health.setText(String.valueOf(ball_count));
 
-            switch (choice) {
-                case 1:
-                    paddle.setWidth(390);
-                    multiplier = 0.25;
-                    break;
-                case 2:
-                    paddle.setWidth(250);
-                    multiplier = 0.75;
-                    break;
-                case 3:
-                    paddle.setWidth(210);
-                    multiplier = 1;
-                    break;
-                case 4:
-                    paddle.setWidth(150);
-                    multiplier = 1.5;
-                    break;
-                case 5:
-                    paddle.setWidth(110);
-                    multiplier = 2;
-                    break;
-            }
+
             ball.checkCollisionScene();
             ball.checkCollisionPaddle(paddle);
             if (ball.checkCollisionBottomZone()) {
                 ball.moving(false);
                 wPressed = false;
                 ball_count--;
-                paddle.setLayoutX(535);
+                paddle.setLayoutX(320 - (paddle.getWidth()/2));
                 System.out.println("health: " + ball_count);
                 if (ball_count == 0) {
                     GameOver();
@@ -169,7 +151,7 @@ public class GameBoardController implements Initializable {
             }
 
             if(dPressed.get() && wPressed){
-                if(paddle.getLayoutX() < (1280 - paddle.getWidth())) {
+                if(paddle.getLayoutX() < (640 - paddle.getWidth())) {
                     paddle.setLayoutX(paddle.getLayoutX() + paddle_movement);
                 }
             }
@@ -200,7 +182,7 @@ public class GameBoardController implements Initializable {
             }
         }
         ball.moving(false);
-        circle.setLayoutX(640);
+        circle.setLayoutX(320);
         circle.setLayoutY(686);//180 for debugging. release is 686
         bricks.clear();
         level++;
@@ -221,6 +203,7 @@ public class GameBoardController implements Initializable {
 
             if(e.getCode() == KeyCode.W) {
                 wPressed = true;
+                ball.get_ball_movement(choice);
                 label.setVisible(false);
             }
 
@@ -283,5 +266,32 @@ public class GameBoardController implements Initializable {
 
     public void get_choice(Integer choice) {
         this.choice = choice;
+        switch (choice) {
+            case 1:
+                paddle.setWidth(390);
+                multiplier = 0.25;
+                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                break;
+            case 2:
+                paddle.setWidth(250);
+                multiplier = 0.75;
+                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                break;
+            case 3:
+                paddle.setWidth(210);
+                multiplier = 1;
+                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                break;
+            case 4:
+                paddle.setWidth(150);
+                multiplier = 1.5;
+                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                break;
+            case 5:
+                paddle.setWidth(110);
+                multiplier = 2;
+                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                break;
+        }
     }
 }

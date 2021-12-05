@@ -5,19 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.GameOverController">
+<AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.GameOverController">
     <children>
-        <Label layoutX="506.0" layoutY="162.0" text="Game Over">
+        <Label layoutX="186.0" layoutY="36.0" text="Game Over">
             <font>
                 <Font size="54.0" />
             </font>
         </Label>
-        <Button layoutX="616.0" layoutY="386.0" mnemonicParsing="false" onAction="#Home" text="Next" />
-      <Label fx:id="label" layoutX="641.0" layoutY="291.0">
+        <Button layoutX="300.0" layoutY="567.0" mnemonicParsing="false" onAction="#Home" text="Next" />
+      <Label fx:id="label" layoutX="287.0" layoutY="253.0" text="qwe">
          <font>
             <Font size="36.0" />
          </font></Label>
-      <Label layoutX="434.0" layoutY="291.0" text="High Score:">
+      <Label layoutX="229.0" layoutY="179.0" text="High Score:">
          <font>
             <Font size="36.0" />
          </font>
