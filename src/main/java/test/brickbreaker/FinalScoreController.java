@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class FinalScoreController implements Initializable {
 
     ArrayList<String> list = new ArrayList<String>();
-    private int score;
+    private double score;
     private boolean save = false;
 
     @FXML
@@ -43,7 +43,7 @@ public class FinalScoreController implements Initializable {
         listView.getItems().addAll(list);
     }
 
-    void get_score(Integer score, Boolean save) {
+    void get_score(Double score, Boolean save) {
 
         this.score = score;
         this.save = save;

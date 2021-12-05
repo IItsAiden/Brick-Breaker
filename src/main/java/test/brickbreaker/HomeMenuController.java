@@ -12,7 +12,7 @@ public class HomeMenuController {
 
     public void start(ActionEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("Tutorial.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("Difficulty.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);

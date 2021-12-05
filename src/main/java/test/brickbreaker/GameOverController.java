@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class GameOverController implements Initializable {
 
-    private int score;
+    private double score;
     ArrayList<String> list = new ArrayList<String>();
 
     @FXML
@@ -29,7 +29,7 @@ public class GameOverController implements Initializable {
         Leaderboard();
     }
 
-    void high_score(Integer score) {
+    void high_score(Double score) {
         this.score = score;
         label.setText(score.toString());
     }

@@ -28,8 +28,10 @@ public class GameBoardController implements Initializable {
     private boolean paused = false;
     private int level = 1;//3 for debugging. release is 1
     private int ball_count = 3;
-    private int score = 0;
+    private double score = 0;
     private boolean blitz_mode = false;
+    private int choice;
+    private double multiplier = 1;
 
     @FXML
     private Circle circle;
@@ -70,7 +72,7 @@ public class GameBoardController implements Initializable {
         } else if (level == 3) {
             color = Color.LIMEGREEN;//Red for debugging.release is limegreen
         }
-        for (int i = 0; i<1;i++){//1 for debugging. Release is 3
+        for (int i = 0; i<3;i++){//1 for debugging. Release is 3
             for (int j = 0; j<10;j++){
                 Rectangle rectangle = new Rectangle((j*128),k,128,30);
                 rectangle.setFill(color);
@@ -98,17 +100,17 @@ public class GameBoardController implements Initializable {
             switch (getBrickState(brick)) {
                 case 3:
                     brick.setFill(Color.ORANGE);
-                    score++;
+                    score = score + (1*multiplier);
                     System.out.println("Score:" + score);
                     break;
                 case 2:
                     brick.setFill(Color.RED);
-                    score++;
+                    score = score + (1*multiplier);
                     System.out.println("Score:" + score);
                     break;
                 case 1:
                     scene.getChildren().remove(brick);
-                    score++;
+                    score = score + (1*multiplier);
                     System.out.println("Score:" + score);
                     return true;
             }
@@ -121,6 +123,28 @@ public class GameBoardController implements Initializable {
         @Override
         public void handle(long timestamp) {
 
+            switch (choice) {
+                case 1:
+                    paddle.setWidth(390);
+                    multiplier = 0.25;
+                    break;
+                case 2:
+                    paddle.setWidth(250);
+                    multiplier = 0.75;
+                    break;
+                case 3:
+                    paddle.setWidth(210);
+                    multiplier = 1;
+                    break;
+                case 4:
+                    paddle.setWidth(150);
+                    multiplier = 1.5;
+                    break;
+                case 5:
+                    paddle.setWidth(110);
+                    multiplier = 2;
+                    break;
+            }
             ball.checkCollisionScene();
             ball.checkCollisionPaddle(paddle);
             if (ball.checkCollisionBottomZone()) {
@@ -247,5 +271,9 @@ public class GameBoardController implements Initializable {
         else if (brick.getFill() == Color.ORANGE) HP = 2;
         else if (brick.getFill() == Color.RED) HP = 1;
         return HP;
+    }
+
+    public void get_choice(Integer choice) {
+        this.choice = choice;
     }
 }
