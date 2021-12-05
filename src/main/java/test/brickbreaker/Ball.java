@@ -55,7 +55,7 @@ public class Ball {
     public Boolean checkCollisionBottomZone(){
         if(ball.getLayoutY() >= (720 - ball.getRadius())){
             ball.setLayoutX(320);
-            ball.setLayoutY(686);//175 for debugging.Release is 686
+            ball.setLayoutY(693);//175 for debugging.Release is 686
             return true;
         }
         return false;

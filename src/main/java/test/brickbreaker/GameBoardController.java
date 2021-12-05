@@ -75,7 +75,7 @@ public class GameBoardController implements Initializable {
         } else if (level == 3) {
             color = Color.LIMEGREEN;//Red for debugging.release is limegreen
         }
-        for (int i = 0; i<1;i++){//1 for debugging. Release is 3
+        for (int i = 0; i<3;i++){//1 for debugging. Release is 3
             for (int j = 0; j<10;j++){
                 Rectangle rectangle = new Rectangle((j*64),k,63,29);
                 rectangle.setFill(color);
@@ -183,7 +183,8 @@ public class GameBoardController implements Initializable {
         }
         ball.moving(false);
         circle.setLayoutX(320);
-        circle.setLayoutY(686);//180 for debugging. release is 686
+        circle.setLayoutY(693);//180 for debugging. release is 686
+        paddle.setLayoutX(320 - paddle.getWidth()/2);
         bricks.clear();
         level++;
         GenerateBrick();
