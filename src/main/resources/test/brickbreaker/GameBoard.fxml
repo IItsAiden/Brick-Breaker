@@ -10,7 +10,7 @@
 <AnchorPane fx:id="scene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.GameBoardController">
     <children>
         <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="9.0" layoutX="230.0" layoutY="700.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
-        <Circle fx:id="circle" fill="DODGERBLUE" layoutX="320.0" layoutY="693.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="circle" fill="DODGERBLUE" layoutX="320.0" layoutY="500.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
         <Button layoutX="295.0" layoutY="-61.0" mnemonicParsing="false" text="Button" />
       <Label fx:id="label" layoutX="133.0" layoutY="320.0" text="Press W to start">
          <font>
