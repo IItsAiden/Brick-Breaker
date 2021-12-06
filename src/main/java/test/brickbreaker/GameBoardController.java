@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -35,8 +36,9 @@ public class GameBoardController implements Initializable {
     private int wcount = 0;
     private int velocity_x;
     private int velocity_y;
-    private Character lastkey = null;
+//    private Character lastkey = null;
     private Character playkey = null;
+    private boolean already = false;
 
     @FXML
     private Circle circle;
@@ -79,29 +81,109 @@ public class GameBoardController implements Initializable {
             color = Color.LIMEGREEN;//Red for debugging.release is limegreen
         }
         for (int i = 0; i<3;i++){//1 for debugging. Release is 3
-            for (int j = 0; j<10;j++){
-                Rectangle rectangle = new Rectangle((j*64),k,63,29);
+            if (i%2 != 0) {
+                Rectangle rectangle = new Rectangle(0,k,32,30);
                 rectangle.setFill(color);
+                rectangle.setStroke(Color.BLACK);
                 scene.getChildren().add(rectangle);
                 bricks.add(rectangle);
+                for (int j = 0; j<10;j++){
+                    Rectangle rectangle2 = new Rectangle((32+(j*64)),k,64,30);
+                    rectangle2.setFill(color);
+                    rectangle2.setStroke(Color.BLACK);
+                    scene.getChildren().add(rectangle2);
+                    bricks.add(rectangle2);
+                }
+            } else {
+                for (int j = 0; j<10;j++){
+                    Rectangle rectangle = new Rectangle((j*64),k,64,30);
+                    rectangle.setFill(color);
+                    rectangle.setStroke(Color.BLACK);
+                    scene.getChildren().add(rectangle);
+                    bricks.add(rectangle);
+                }
             }
             k+=30;
+
         }
     }
 
     public boolean CheckBrickCollision(Rectangle brick) {
-        if (circle.getBoundsInParent().intersects(brick.getBoundsInParent())){
+        if (circle.getBoundsInParent().intersects(brick.getBoundsInParent()) && !already){
+            already = true;
             boolean rightBorder = circle.getLayoutX() >= ((brick.getX() + brick.getWidth()) - circle.getRadius());
             boolean leftBorder = circle.getLayoutX() <= (brick.getX() + circle.getRadius());
             boolean bottomBorder = circle.getLayoutY() >= ((brick.getY() + brick.getHeight()) - circle.getRadius());
             boolean topBorder = circle.getLayoutY() <= (brick.getY() + circle.getRadius());
 
-            if (rightBorder || leftBorder) {
-                ball.reverse_x();
+//            if (bottomBorder && rightBorder && (ball.velocity_x > 0)) {
+//                System.out.println("true");
+//                ball.reverse_y();
+//            }
+//            if ((bottomBorder || topBorder) && (leftBorder || rightBorder)) {
+//                System.out.println("not true");
+//                ball.reverse_x();
+//                ball.reverse_y();
+//            } else {
+//                if (bottomBorder || topBorder) {
+//                    ball.reverse_y();
+//                }
+//                if (rightBorder || leftBorder) {
+//                    ball.reverse_x();
+//                }
+//            }
+
+
+            if (leftBorder && bottomBorder) {
+                if (ball.velocity_x < 0) {
+                    ball.reverse_y();
+                    System.out.println("down");
+                } else if (ball.velocity_y < 0) {
+                    ball.reverse_x();
+                    System.out.println("left");
+                } else {
+                    ball.reverse_x();
+                    ball.reverse_y();
+                    System.out.println("opposite");
+                }
+            } else if (rightBorder && topBorder) {
+                if (ball.velocity_x > 0) {
+                    ball.reverse_y();
+                } else if (ball.velocity_y > 0) {
+                    ball.reverse_x();
+                } else {
+                    ball.reverse_x();
+                    ball.reverse_y();
+                }
+            } else if (leftBorder && topBorder) {
+                if (ball.velocity_x < 0) {
+                    ball.reverse_y();
+                } else if (ball.velocity_y > 0) {
+                    ball.reverse_x();
+                } else {
+                    ball.reverse_x();
+                    ball.reverse_y();
+                }
+            } else if (rightBorder && bottomBorder) {
+                if (ball.velocity_x > 0) {
+                    System.out.println("down");
+                    ball.reverse_y();
+                } else if (ball.velocity_y < 0) {
+                    ball.reverse_x();
+                } else {
+                    ball.reverse_x();
+                    ball.reverse_y();
+                }
+            } else {
+                if (rightBorder || leftBorder) {
+                    ball.reverse_x();
+                }
+                if (bottomBorder || topBorder) {
+                    ball.reverse_y();
+                }
             }
-            if (bottomBorder || topBorder) {
-                ball.reverse_y();
-            }
+
+
 
             switch (getBrickState(brick)) {
                 case 3:
@@ -175,6 +257,7 @@ public class GameBoardController implements Initializable {
                     blitz_mode = true;
                 }
             }
+            already = false;
         }
     };
 
@@ -186,7 +269,7 @@ public class GameBoardController implements Initializable {
         }
         ball.moving(false);
         circle.setLayoutX(320);
-        circle.setLayoutY(693);//180 for debugging. release is 693
+        circle.setLayoutY(500);//180 for debugging. release is 693
         paddle.setLayoutX(320 - paddle.getWidth()/2);
         bricks.clear();
         level++;
@@ -216,10 +299,10 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.Q) {
-                if (lastkey == null || lastkey != 'Q'){
-                    lastkey = 'Q';
+//                if (lastkey == null || lastkey != 'Q'){
+//                    lastkey = 'Q';
                     paused();
-                }
+//                }
             }
         });
 
@@ -233,7 +316,7 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.Q) {
-                lastkey = null;
+//                lastkey = null;
             }
 
             if(e.getCode() == KeyCode.W) {
@@ -251,7 +334,10 @@ public class GameBoardController implements Initializable {
             System.out.println("Game paused");
         } else {
             timer.start();
-            label.setVisible(false);
+            if (wPressed) {
+                label.setVisible(false);
+            }
+            label.setText(" Press W to start");
             System.out.println("Game resume");
         }
     }

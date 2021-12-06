@@ -28,7 +28,7 @@
          <font>
             <Font size="21.0" />
          </font></RadioButton>
-      <Label fx:id="label" layoutX="357.0" layoutY="184.0" text="Description">
+      <Label fx:id="Description" layoutX="357.0" layoutY="184.0" text="Normal">
          <font>
             <Font size="36.0" />
          </font></Label>
@@ -44,5 +44,25 @@
          <font>
             <Font size="21.0" />
          </font></Button>
+      <Label fx:id="paddle" layoutX="357.0" layoutY="271.0" text="Normal paddle">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="ball" layoutX="357.0" layoutY="330.0" text="Normal ball speed">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="357.0" layoutY="389.0" text="Score multiplier:">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="multiplier" layoutX="357.0" layoutY="420.0" text="100">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
