@@ -32,8 +32,10 @@ public class GameBoardController implements Initializable {
     private boolean blitz_mode = false;
     private int choice;
     private int multiplier = 1;
+    private int wcount = 0;
     private int velocity_x;
     private int velocity_y;
+    private Character lastkey = null;
 
     @FXML
     private Circle circle;
@@ -208,7 +210,10 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.Q) {
-                paused();
+                if (lastkey == null || lastkey != 'Q'){
+                    lastkey = 'Q';
+                    paused();
+                }
             }
         });
 
@@ -219,6 +224,10 @@ public class GameBoardController implements Initializable {
 
             if(e.getCode() == KeyCode.D) {
                 dPressed.set(false);
+            }
+
+            if(e.getCode() == KeyCode.Q) {
+                lastkey = null;
             }
 
             if(e.getCode() == KeyCode.W) {
