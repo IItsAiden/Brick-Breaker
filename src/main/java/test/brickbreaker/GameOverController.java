@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -50,13 +51,16 @@ public class GameOverController implements Initializable {
     }
 
     public Boolean check_new_highscore() {
+        int counter = 0;//patch fix unable to save when leaderboard have less than 10 highscore
         for (String s : list) {
-            System.out.println(s);
-            if (score >= Integer.parseInt(s)) {
+            counter++;
+            String[] array;
+            array = s.split(",");
+            if (score >= Integer.parseInt(array[1])) {
                 return true;
             }
         }
-        return false;
+        return counter < 10;//patch fix unable to save when leaderboard have less than 10 highscore
     }
 
     public void Leaderboard() {
@@ -65,7 +69,7 @@ public class GameOverController implements Initializable {
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
                 PrintWriter myWriter = new PrintWriter(new FileWriter("Leaderboard.txt", true));
-                myWriter.println(0);
+                myWriter.println("Admin,0");
                 myWriter.close();
             }
             int counter = 0;
@@ -80,10 +84,4 @@ public class GameOverController implements Initializable {
             e.printStackTrace();
         }
     }
-    //Patch can be use here
-    //Problem with this leaderboard is it will read all list.
-    //Our leaderboard must be top 10 only.
-    //path to be fix is limit it to 10
-    //so that player only get to save if their score is in top 10.
-
 }

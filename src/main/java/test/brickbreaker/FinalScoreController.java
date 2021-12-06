@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -23,6 +24,7 @@ public class FinalScoreController implements Initializable {
     ArrayList<String> list = new ArrayList<String>();
     private int score;
     private boolean save = false;
+    private String username;
 
     @FXML
     private Button button;
@@ -36,11 +38,13 @@ public class FinalScoreController implements Initializable {
     @FXML
     private Label nice;
 
+    @FXML
+    private TextField textField;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Leaderboard();
-        list.sort(Collections.reverseOrder());
         System.out.println(list);
         listView.getItems().addAll(list);
     }
@@ -107,13 +111,30 @@ public class FinalScoreController implements Initializable {
     }
 
     public void add_highscore() {
-        System.out.println("Final:" + list);
+        username = textField.getText();
+        username = username.replaceAll("\\s+","");
+        username = username + "," + score;
+        int counter = 0;
+        boolean added = false;
         for (int i = 0; i < list.size();i ++) {
-            if (score >= Integer.parseInt(list.get(i))) {
-                list.add(i,String.valueOf(score));
-                System.out.println("Yes");
+            counter++;
+
+            String[] array;
+            array = list.get(i).split(",");
+            if (score >= Integer.parseInt(array[1])) {
+                list.add(i,username);
+                added = true;
+                System.out.println("Final:" + list);
                 break;
             }
+
+//            if (score >= Integer.parseInt(list.get(i))) {
+//                System.out.println("Yes");
+//                break;
+//            }
+        }
+        if (counter < 10 && !added) {
+            list.add(username);
         }
 
     }

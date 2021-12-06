@@ -22,11 +22,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable {
+    //today goal
+    //Add can save user name
+    //style the game
 
     private Ball ball;
     private ArrayList<Rectangle> bricks = new ArrayList<>();
     private boolean paused = false;
-    private int level = 1;//3 for debugging. release is 1
+    private int level = 3;//3 for debugging. release is 1
     private int ball_count = 3;
     private int score = 0;
     private boolean blitz_mode = false;
@@ -67,15 +70,15 @@ public class GameBoardController implements Initializable {
     public void GenerateBrick() {
 
         int k = 0;
-        Color color = Color.LIMEGREEN;//Red for debugging.release is limegreen
+        Color color = Color.RED;//Red for debugging.release is limegreen
         if (level == 1) {
             color = Color.RED;
         } else if (level == 2) {
             color = Color.ORANGE;
         } else if (level == 3) {
-            color = Color.LIMEGREEN;//Red for debugging.release is limegreen
+            color = Color.RED;//Red for debugging.release is limegreen
         }
-        for (int i = 0; i<3;i++){//1 for debugging. Release is 3
+        for (int i = 0; i<1;i++){//1 for debugging. Release is 3
             for (int j = 0; j<10;j++){
                 Rectangle rectangle = new Rectangle((j*64),k,63,29);
                 rectangle.setFill(color);
@@ -182,7 +185,7 @@ public class GameBoardController implements Initializable {
         }
         ball.moving(false);
         circle.setLayoutX(320);
-        circle.setLayoutY(693);//180 for debugging. release is 693
+        circle.setLayoutY(180);//180 for debugging. release is 693
         paddle.setLayoutX(320 - paddle.getWidth()/2);
         bricks.clear();
         level++;

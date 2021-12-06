@@ -30,7 +30,6 @@ public class LeaderboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Leaderboard();
-        list.sort(Collections.reverseOrder());
         System.out.println(list);
         listView.getItems().addAll(list);
     }
