@@ -23,7 +23,7 @@ public class Ball {
     public void checkCollisionScene(){
         boolean rightBorder = ball.getLayoutX() >= (640 - ball.getRadius());
         boolean leftBorder = ball.getLayoutX() <= (0 + ball.getRadius());
-        boolean bottomBorder = ball.getLayoutY() >= (520 - ball.getRadius());//200 for debugging.Release now is 720. final will remove
+        boolean bottomBorder = ball.getLayoutY() >= (720 - ball.getRadius());//200 for debugging.Release now is 720. final will remove
         boolean topBorder = ball.getLayoutY() <= (0 + ball.getRadius());
 
         if (rightBorder || leftBorder) {
@@ -40,13 +40,12 @@ public class Ball {
 
             boolean rightBorder = ball.getLayoutX() >= ((paddle.getLayoutX() + paddle.getWidth()) - ball.getRadius());
             boolean leftBorder = ball.getLayoutX() <= (paddle.getLayoutX() + ball.getRadius());
-            boolean bottomBorder = ball.getLayoutY() >= ((paddle.getLayoutY() + paddle.getHeight()) - ball.getRadius());
             boolean topBorder = ball.getLayoutY() <= (paddle.getLayoutY() + ball.getRadius());
 
             if (rightBorder || leftBorder) {
                 reverse_x();
             }
-            if (bottomBorder || topBorder) {
+            if (topBorder) {
                 reverse_y();
             }
         }
@@ -55,7 +54,7 @@ public class Ball {
     public Boolean checkCollisionBottomZone(){
         if(ball.getLayoutY() >= (720 - ball.getRadius())){
             ball.setLayoutX(320);
-            ball.setLayoutY(693);//180 for debug. 693
+            ball.setLayoutY(690);//180 for debug. 690
             return true;
         }
         return false;

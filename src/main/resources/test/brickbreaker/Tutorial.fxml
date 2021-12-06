@@ -2,18 +2,120 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.TutorialController">
    <children>
-      <Button layoutX="266.0" layoutY="630.0" mnemonicParsing="false" onAction="#Start" text="Let's Go!">
+      <ImageView fitHeight="721.0" fitWidth="641.0">
+         <image>
+            <Image url="@../../Tutorial.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="390.0" layoutY="630.0" mnemonicParsing="false" onAction="#Start" text="Let's Go!">
          <font>
             <Font size="21.0" />
          </font></Button>
-      <Label layoutX="172.0" layoutY="50.0" text="How To Play">
+      <ImageView fx:id="imageView" fitHeight="72.0" fitWidth="56.0" layoutX="138.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../A%20key.png" />
+         </image></ImageView>
+      <ImageView fx:id="imageView1" fitHeight="72.0" fitWidth="56.0" layoutX="213.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../D%20key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageView2" fitHeight="72.0" fitWidth="56.0" layoutX="213.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../S%20key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageView3" fitHeight="72.0" fitWidth="56.0" layoutX="213.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../W%20key.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="261.0" layoutY="150.0" text="Control">
          <font>
-            <Font size="54.0" />
-         </font></Label>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="241.0" layoutY="373.0" text="Gameplay">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="135.0" layoutY="441.0" text="Hard">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="269.0" layoutY="210.0" text="Move the paddle">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="196.0" layoutY="199.0" text="/">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="269.0" layoutY="272.0" text="Pause / Resume">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="269.0" layoutY="330.0" text="Start">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imageView4" fitHeight="56.0" fitWidth="78.0" layoutX="50.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Hard.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageView41" fitHeight="56.0" fitWidth="78.0" layoutX="50.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Firm.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageView42" fitHeight="56.0" fitWidth="78.0" layoutX="50.0" layoutY="618.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Soft.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="136.0" layoutY="465.0" text="3 Hits to break">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="137.0" layoutY="534.0" text="Firm">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="133.0" layoutY="558.0" text="2 Hits to break">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="138.0" layoutY="618.0" text="Soft">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="137.0" layoutY="645.0" text="1 Hit to break">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="297.0" layoutY="412.0" prefHeight="221.0" prefWidth="278.0" text="The game consist of 3 levels, after clearing all 3 levels, game will enter blitz mode. The paddle will be shorter and ball will be faster." wrapText="true">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

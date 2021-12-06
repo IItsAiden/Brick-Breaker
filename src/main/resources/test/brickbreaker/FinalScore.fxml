@@ -4,47 +4,46 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.FinalScoreController">
    <children>
-      <Label layoutX="128.0" layoutY="130.0" text="LEADERBOARD">
-         <font>
-            <Font size="54.0" />
-         </font></Label>
-      <Button fx:id="button" layoutX="284.0" layoutY="630.0" mnemonicParsing="false" onAction="#Next" text="Next">
+      <ImageView fitHeight="721.0" fitWidth="640.0">
+         <image>
+            <Image url="@../../Leaderboard.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="button" layoutX="141.0" layoutY="547.0" mnemonicParsing="false" onAction="#Next" text="Next">
          <font>
             <Font size="21.0" />
          </font></Button>
-      <ListView fx:id="listView" layoutX="390.0" layoutY="218.0" prefHeight="237.0" prefWidth="200.0" />
-      <Label layoutX="40.0" layoutY="218.0" text="Your Score:">
+      <ListView fx:id="listView" fixedCellSize="30.0" layoutX="331.0" layoutY="286.0" prefHeight="306.0" prefWidth="214.0" />
+      <Label layoutX="47.0" layoutY="218.0" text="Your Score:">
          <font>
-            <Font size="21.0" />
+            <Font size="36.0" />
          </font></Label>
-      <Label fx:id="label" layoutX="167.0" layoutY="218.0" prefHeight="31.0" prefWidth="234.0" text="score">
+      <Label fx:id="label" layoutX="231.0" layoutY="218.0" prefHeight="31.0" prefWidth="234.0" text="score">
          <font>
-            <Font size="21.0" />
+            <Font size="36.0" />
          </font></Label>
-      <Label fx:id="nice" layoutX="40.0" layoutY="260.0" text="Try harder next time.">
+      <Label fx:id="nice" layoutX="67.0" layoutY="295.0" text="Try harder next time.">
          <font>
-            <Font size="21.0" />
+            <Font size="24.0" />
          </font></Label>
-      <Label layoutX="234.0" layoutY="50.0" text="TOP 10">
-         <font>
-            <Font size="54.0" />
-         </font></Label>
-      <TextField fx:id="textField" layoutX="37.0" layoutY="378.0">
+      <TextField fx:id="textField" layoutX="47.0" layoutY="432.0">
          <font>
             <Font size="21.0" />
          </font>
       </TextField>
-      <Label layoutX="85.0" layoutY="345.0" text="Enter Username">
+      <Label layoutX="93.0" layoutY="397.0" text="Enter Username">
          <font>
-            <Font size="21.0" />
+            <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="error" layoutX="40.0" layoutY="423.0" text="Username can not contain ," visible="false">
+      <Label fx:id="error" layoutX="50.0" layoutY="477.0" text="Username can not contain ,">
          <font>
             <Font size="21.0" />
          </font>

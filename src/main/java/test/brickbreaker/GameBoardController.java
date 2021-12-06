@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -36,7 +37,7 @@ public class GameBoardController implements Initializable {
     private int wcount = 0;
     private int velocity_x;
     private int velocity_y;
-//    private Character lastkey = null;
+    private Character lastkey = null;
     private Character playkey = null;
     private boolean already = false;
 
@@ -50,10 +51,13 @@ public class GameBoardController implements Initializable {
     private Rectangle paddle;
 
     @FXML
-    private Label label, onscreen_score, onscreen_health;
+    private Label label, onscreen_score;
 
     @FXML
     private Button Next_level;
+
+    @FXML
+    private ImageView heart1, heart2;
 
     private final BooleanProperty aPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
@@ -212,7 +216,6 @@ public class GameBoardController implements Initializable {
         public void handle(long timestamp) {
 
             onscreen_score.setText(String.valueOf(score));
-            onscreen_health.setText(String.valueOf(ball_count));
 
             ball.checkCollisionScene();
             ball.checkCollisionPaddle(paddle);
@@ -221,6 +224,12 @@ public class GameBoardController implements Initializable {
                 wPressed = false;
                 playkey = null;
                 ball_count--;
+                if (ball_count == 2) {
+                    heart1.setVisible(false);
+                }
+                if (ball_count == 1) {
+                    heart2.setVisible(false);
+                }
                 paddle.setLayoutX(320 - (paddle.getWidth()/2));
                 System.out.println("health: " + ball_count);
                 if (ball_count == 0) {
@@ -264,12 +273,16 @@ public class GameBoardController implements Initializable {
     public void NextLevel(ActionEvent event) {
         if (blitz_mode) {
             if (paddle.getWidth() > 90) {
-                paddle.setWidth(paddle.getWidth() - 20);
+                paddle.setWidth(paddle.getWidth() - 30);
+            }
+            if (paddle.getWidth() <= 90) {
+                ball.velocity_x++;
+                ball.velocity_y++;
             }
         }
         ball.moving(false);
         circle.setLayoutX(320);
-        circle.setLayoutY(500);//180 for debugging. release is 693
+        circle.setLayoutY(690);//180 for debugging. release is 690
         paddle.setLayoutX(320 - paddle.getWidth()/2);
         bricks.clear();
         level++;
@@ -299,10 +312,10 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.Q) {
-//                if (lastkey == null || lastkey != 'Q'){
-//                    lastkey = 'Q';
+                if (lastkey == null || lastkey != 'Q'){
+                    lastkey = 'Q';
                     paused();
-//                }
+                }
             }
         });
 
@@ -316,7 +329,7 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.Q) {
-//                lastkey = null;
+                lastkey = null;
             }
 
             if(e.getCode() == KeyCode.W) {
