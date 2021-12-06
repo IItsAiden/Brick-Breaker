@@ -25,6 +25,7 @@ public class FinalScoreController implements Initializable {
     private int score;
     private boolean save = false;
     private String username;
+    private String userinput;
 
     @FXML
     private Button button;
@@ -33,7 +34,7 @@ public class FinalScoreController implements Initializable {
     private ListView<String> listView;
 
     @FXML
-    private Label label;
+    private Label label, error;
 
     @FXML
     private Label nice;
@@ -78,35 +79,39 @@ public class FinalScoreController implements Initializable {
     }
 
     public void Next(ActionEvent event) throws IOException {
-
-        if (save) {
-            add_highscore();
-
-            try {
-                PrintWriter myWriter = new PrintWriter("Leaderboard.txt");
-                for (String s : list) {
-                    myWriter.println(s);
-                }
-                myWriter.close();
-                System.out.println("Successfully wrote to the file.");
-            } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-            FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
+        userinput = textField.getText();
+        if (userinput.contains(",")) {
+            error.setVisible(true);
         } else {
+            if (save) {
+                add_highscore();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
+                try {
+                    PrintWriter myWriter = new PrintWriter("Leaderboard.txt");
+                    for (String s : list) {
+                        myWriter.println(s);
+                    }
+                    myWriter.close();
+                    System.out.println("Successfully wrote to the file.");
+                } catch (IOException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+                FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+            } else {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+            }
         }
     }
 
