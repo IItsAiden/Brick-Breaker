@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="721.0" fitWidth="640.0">
          <image>
-            <Image url="@../../Difficulty.jpg" />
+            <Image url="@../../img/Difficulty.jpg" />
          </image>
       </ImageView>
       <RadioButton fx:id="rb3" layoutX="60.0" layoutY="360.0" mnemonicParsing="false" onAction="#get_difficulty" selected="true" text="Normal">

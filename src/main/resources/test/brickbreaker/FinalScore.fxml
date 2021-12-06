@@ -13,14 +13,14 @@
    <children>
       <ImageView fitHeight="721.0" fitWidth="640.0">
          <image>
-            <Image url="@../../Leaderboard.jpg" />
+            <Image url="@../../img/Leaderboard.jpg" />
          </image>
       </ImageView>
       <Button fx:id="button" layoutX="141.0" layoutY="547.0" mnemonicParsing="false" onAction="#Next" text="Next">
          <font>
             <Font size="21.0" />
          </font></Button>
-      <ListView fx:id="listView" fixedCellSize="30.0" layoutX="331.0" layoutY="286.0" prefHeight="306.0" prefWidth="214.0" />
+      <ListView fx:id="listView" fixedCellSize="30.0" layoutX="344.0" layoutY="286.0" prefHeight="306.0" prefWidth="201.0" />
       <Label layoutX="47.0" layoutY="218.0" text="Your Score:">
          <font>
             <Font size="36.0" />
@@ -29,7 +29,7 @@
          <font>
             <Font size="36.0" />
          </font></Label>
-      <Label fx:id="nice" layoutX="67.0" layoutY="295.0" text="Try harder next time.">
+      <Label fx:id="nice" layoutX="42.0" layoutY="297.0" text="Try harder next time.">
          <font>
             <Font size="24.0" />
          </font></Label>
@@ -43,7 +43,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="error" layoutX="50.0" layoutY="477.0" text="Username can not contain ,">
+      <Label fx:id="error" layoutX="50.0" layoutY="477.0" text="Username can not contain ," visible="false">
          <font>
             <Font size="21.0" />
          </font>

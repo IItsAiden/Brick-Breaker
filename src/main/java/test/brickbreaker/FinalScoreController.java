@@ -64,7 +64,7 @@ public class FinalScoreController implements Initializable {
 
     public void Leaderboard() {
         try {
-            File myObj = new File("Leaderboard.txt");
+            File myObj = new File("src/main/resources/Leaderboard.txt");
             int counter = 0;
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext() && counter < 10) {
@@ -80,14 +80,18 @@ public class FinalScoreController implements Initializable {
 
     public void Next(ActionEvent event) throws IOException {
         userinput = textField.getText();
-        if (userinput.contains(",")) {
+        if (textField.getText() == null || textField.getText().trim().isEmpty()) {
+            error.setText("Please enter username");
+            error.setVisible(true);
+        } else if (userinput.contains(",")) {
+            error.setText("Username can not contain ,");
             error.setVisible(true);
         } else {
             if (save) {
                 add_highscore();
 
                 try {
-                    PrintWriter myWriter = new PrintWriter("Leaderboard.txt");
+                    PrintWriter myWriter = new PrintWriter("src/main/resources/Leaderboard.txt");
                     for (String s : list) {
                         myWriter.println(s);
                     }

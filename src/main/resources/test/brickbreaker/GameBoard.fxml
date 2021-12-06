@@ -13,7 +13,7 @@
     <children>
       <ImageView fitHeight="721.0" fitWidth="646.0" layoutX="-5.0">
          <image>
-            <Image url="@../../Board.jpg" />
+            <Image url="@../../img/Board.jpg" />
          </image>
       </ImageView>
         <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="#267871" height="9.0" layoutX="230.0" layoutY="700.0" stroke="#134e5e" strokeType="INSIDE" width="180.0" />
@@ -40,17 +40,17 @@
       </Label>
       <ImageView fitHeight="31.0" fitWidth="32.0" layoutX="6.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Heart.png" />
+            <Image url="@../../img/Heart.png" />
          </image>
       </ImageView>
       <ImageView fx:id="heart2" fitHeight="31.0" fitWidth="32.0" layoutX="37.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Heart.png" />
+            <Image url="@../../img/Heart.png" />
          </image>
       </ImageView>
       <ImageView fx:id="heart1" fitHeight="31.0" fitWidth="32.0" layoutX="68.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Heart.png" />
+            <Image url="@../../img/Heart.png" />
          </image>
       </ImageView>
     </children>

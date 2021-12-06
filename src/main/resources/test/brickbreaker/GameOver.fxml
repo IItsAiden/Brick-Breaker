@@ -11,14 +11,14 @@
     <children>
       <ImageView fitHeight="720.0" fitWidth="648.0" layoutX="-6.0">
          <image>
-            <Image url="@../../Game%20Over.jpg" />
+            <Image url="@../../img/Game%20Over.jpg" />
          </image>
       </ImageView>
-        <Button layoutX="252.0" layoutY="552.0" mnemonicParsing="false" onAction="#Home" text="Next">
+        <Button layoutX="282.0" layoutY="552.0" mnemonicParsing="false" onAction="#Home" text="Next">
          <font>
             <Font size="21.0" />
          </font></Button>
-      <Label fx:id="label" layoutX="228.0" layoutY="396.0" prefHeight="80.0" prefWidth="229.0" text="SCORE" textAlignment="CENTER">
+      <Label fx:id="label" layoutX="124.0" layoutY="360.0" prefHeight="80.0" prefWidth="229.0" text="SCORE" textAlignment="CENTER">
          <font>
             <Font size="54.0" />
          </font></Label>

@@ -10,7 +10,9 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,7 +48,13 @@ public class LeaderboardController implements Initializable {
 
     public void Leaderboard() {
         try {
-            File myObj = new File("Leaderboard.txt");
+            File myObj = new File("src/main/resources/Leaderboard.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+                PrintWriter myWriter = new PrintWriter(new FileWriter("src/main/resources/Leaderboard.txt", true));
+                myWriter.println("Admin,0");
+                myWriter.close();
+            }
             int counter = 0;
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext() && counter < 10) {

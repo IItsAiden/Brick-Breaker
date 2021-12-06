@@ -65,10 +65,10 @@ public class GameOverController implements Initializable {
 
     public void Leaderboard() {
         try {
-            File myObj = new File("Leaderboard.txt");
+            File myObj = new File("src/main/resources/Leaderboard.txt");
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
-                PrintWriter myWriter = new PrintWriter(new FileWriter("Leaderboard.txt", true));
+                PrintWriter myWriter = new PrintWriter(new FileWriter("src/main/resources/Leaderboard.txt", true));
                 myWriter.println("Admin,0");
                 myWriter.close();
             }

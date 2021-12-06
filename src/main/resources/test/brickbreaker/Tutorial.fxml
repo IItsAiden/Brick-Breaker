@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="721.0" fitWidth="641.0">
          <image>
-            <Image url="@../../Tutorial.jpg" />
+            <Image url="@../../img/Tutorial.jpg" />
          </image>
       </ImageView>
       <Button layoutX="390.0" layoutY="630.0" mnemonicParsing="false" onAction="#Start" text="Let's Go!">
@@ -20,21 +20,21 @@
          </font></Button>
       <ImageView fx:id="imageView" fitHeight="72.0" fitWidth="56.0" layoutX="138.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../A%20key.png" />
+            <Image url="@../../img/A%20key.png" />
          </image></ImageView>
       <ImageView fx:id="imageView1" fitHeight="72.0" fitWidth="56.0" layoutX="213.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../D%20key.png" />
+            <Image url="@../../img/D%20key.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageView2" fitHeight="72.0" fitWidth="56.0" layoutX="213.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../S%20key.png" />
+            <Image url="@../../img/S%20key.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageView3" fitHeight="72.0" fitWidth="56.0" layoutX="213.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../W%20key.png" />
+            <Image url="@../../img/W%20key.png" />
          </image>
       </ImageView>
       <Label layoutX="261.0" layoutY="150.0" text="Control">
@@ -74,17 +74,17 @@
       </Label>
       <ImageView fx:id="imageView4" fitHeight="56.0" fitWidth="78.0" layoutX="50.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Hard.png" />
+            <Image url="@../../img/Hard.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageView41" fitHeight="56.0" fitWidth="78.0" layoutX="50.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Firm.png" />
+            <Image url="@../../img/Firm.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageView42" fitHeight="56.0" fitWidth="78.0" layoutX="50.0" layoutY="618.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Soft.png" />
+            <Image url="@../../img/Soft.png" />
          </image>
       </ImageView>
       <Label layoutX="136.0" layoutY="465.0" text="3 Hits to break">
