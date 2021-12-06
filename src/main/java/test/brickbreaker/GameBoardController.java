@@ -271,10 +271,12 @@ public class GameBoardController implements Initializable {
     };
 
     public void NextLevel(ActionEvent event) {
+        //check extra level
         if (blitz_mode) {
             if (paddle.getWidth() > 90) {
                 paddle.setWidth(paddle.getWidth() - 30);
             }
+            //more level
             if (paddle.getWidth() <= 90) {
                 ball.velocity_x++;
                 ball.velocity_y++;
