@@ -36,6 +36,7 @@ public class GameBoardController implements Initializable {
     private int velocity_x;
     private int velocity_y;
     private Character lastkey = null;
+    private Character playkey = null;
 
     @FXML
     private Circle circle;
@@ -136,6 +137,7 @@ public class GameBoardController implements Initializable {
             if (ball.checkCollisionBottomZone()) {
                 ball.moving(false);
                 wPressed = false;
+                playkey = null;
                 ball_count--;
                 paddle.setLayoutX(320 - (paddle.getWidth()/2));
                 System.out.println("health: " + ball_count);
@@ -188,6 +190,7 @@ public class GameBoardController implements Initializable {
         paddle.setLayoutX(320 - paddle.getWidth()/2);
         bricks.clear();
         level++;
+        playkey = null;
         GenerateBrick();
         label.setText("Press W to start");
         Next_level.setVisible(false);
@@ -204,9 +207,12 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.W) {
-                wPressed = true;
-                ball.get_ball_movement(choice);
-                label.setVisible(false);
+                if (playkey == null || playkey != 'W'){
+                    playkey = 'W';
+                    wPressed = true;
+                    ball.get_ball_movement(choice);
+                    label.setVisible(false);
+                }
             }
 
             if(e.getCode() == KeyCode.Q) {
