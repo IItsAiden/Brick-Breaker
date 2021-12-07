@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable {
     //test
-    //test2
+    //test3
 
     private Ball ball;
     private ArrayList<Rectangle> bricks = new ArrayList<>();
