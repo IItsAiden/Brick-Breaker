@@ -7,8 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -54,7 +57,7 @@ public class GameBoardController implements Initializable {
     private Label label, onscreen_score;
 
     @FXML
-    private Button Next_level;
+    private Button Next_level, leave;
 
     @FXML
     private ImageView heart1, heart2;
@@ -347,11 +350,13 @@ public class GameBoardController implements Initializable {
             label.setVisible(true);
             label.setText("Game Paused");
             System.out.println("Game paused");
+            leave.setVisible(true);
         } else {
             timer.start();
             if (wPressed) {
                 label.setVisible(false);
             }
+            leave.setVisible(false);
             label.setText(" Press W to start");
             System.out.println("Game resume");
         }
@@ -408,6 +413,26 @@ public class GameBoardController implements Initializable {
                 multiplier = 200;
                 paddle.setLayoutX(320 - paddle.getWidth()/2);
                 break;
+        }
+    }
+
+    public void leave(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Leave");
+        alert.setHeaderText("Are you sure?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

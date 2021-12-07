@@ -53,5 +53,10 @@
             <Image url="@../../img/Heart.png" />
          </image>
       </ImageView>
+      <Button fx:id="leave" layoutX="248.0" layoutY="420.0" mnemonicParsing="false" onAction="#leave" text="Leave Game" visible="false">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
