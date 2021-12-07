@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="450.0" fitWidth="603.0">
          <image>
-            <Image url="@../../img/Leaderboard.jpg" />
+            <Image url="@../../img/FinalScore.jpg" />
          </image>
       </ImageView>
       <ListView fx:id="listView" fixedCellSize="21.0" layoutX="174.0" layoutY="131.0" prefHeight="215.0" prefWidth="255.0" />

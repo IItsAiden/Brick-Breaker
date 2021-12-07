@@ -13,7 +13,7 @@
     <children>
       <ImageView fitHeight="450.0" fitWidth="600.0">
          <image>
-            <Image url="@../../img/Leaderboard.jpg" />
+            <Image url="@../../img/GameBoard.jpg" />
          </image>
       </ImageView>
         <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="#267871" height="9.0" layoutX="220.0" layoutY="429.0" stroke="#134e5e" strokeType="INSIDE" width="160.0" />
