@@ -9,51 +9,51 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.GameBoardController">
+<AnchorPane fx:id="scene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.GameBoardController">
     <children>
-      <ImageView fitHeight="721.0" fitWidth="646.0" layoutX="-5.0">
+      <ImageView fitHeight="450.0" fitWidth="600.0">
          <image>
-            <Image url="@../../img/Board.jpg" />
+            <Image url="@../../img/Leaderboard.jpg" />
          </image>
       </ImageView>
-        <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="#267871" height="9.0" layoutX="230.0" layoutY="700.0" stroke="#134e5e" strokeType="INSIDE" width="180.0" />
-        <Circle fx:id="circle" fill="#004777" layoutX="320.0" layoutY="690.0" radius="9.0" stroke="#134e5e" strokeType="INSIDE" />
+        <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="#267871" height="9.0" layoutX="220.0" layoutY="429.0" stroke="#134e5e" strokeType="INSIDE" width="160.0" />
+        <Circle fx:id="circle" fill="#004777" layoutX="300.0" layoutY="419.0" radius="9.0" stroke="#134e5e" strokeType="INSIDE" />
         <Button layoutX="295.0" layoutY="-61.0" mnemonicParsing="false" text="Button" />
-      <Label fx:id="label" layoutX="131.0" layoutY="334.0" text="Press W to start" textFill="WHITE">
+      <Label fx:id="label" layoutX="108.0" layoutY="161.0" text="Press W to start" textFill="WHITE">
          <font>
             <Font size="54.0" />
          </font>
       </Label>
-      <Button fx:id="Next_level" layoutX="258.0" layoutY="420.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" visible="false">
+      <Button fx:id="Next_level" layoutX="233.0" layoutY="257.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" visible="false">
          <font>
             <Font size="21.0" />
          </font></Button>
-      <Label layoutX="6.0" layoutY="435.0" text="Score:">
+      <Label layoutX="12.0" layoutY="240.0" text="Score:">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Label fx:id="onscreen_score" layoutX="63.0" layoutY="435.0" text="0">
+      <Label fx:id="onscreen_score" layoutX="69.0" layoutY="240.0" text="0">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <ImageView fitHeight="31.0" fitWidth="32.0" layoutX="6.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="31.0" fitWidth="32.0" layoutX="12.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/Heart.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="heart2" fitHeight="31.0" fitWidth="32.0" layoutX="37.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="heart2" fitHeight="31.0" fitWidth="32.0" layoutX="42.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/Heart.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="heart1" fitHeight="31.0" fitWidth="32.0" layoutX="68.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="heart1" fitHeight="31.0" fitWidth="32.0" layoutX="72.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/Heart.png" />
          </image>
       </ImageView>
-      <Button fx:id="leave" layoutX="248.0" layoutY="420.0" mnemonicParsing="false" onAction="#leave" text="Leave Game" visible="false">
+      <Button fx:id="leave" layoutX="221.0" layoutY="257.0" mnemonicParsing="false" onAction="#leave" text="Leave Game" visible="false">
          <font>
             <Font size="21.0" />
          </font>

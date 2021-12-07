@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.LeaderboardController">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.brickbreaker.LeaderboardController">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="640.0" layoutX="1.0">
+      <ImageView fitHeight="450.0" fitWidth="603.0">
          <image>
             <Image url="@../../img/Leaderboard.jpg" />
          </image>
       </ImageView>
-      <ListView fx:id="listView" fixedCellSize="30.0" layoutX="141.0" layoutY="246.0" prefHeight="306.0" prefWidth="327.0" />
-      <Button layoutX="269.0" layoutY="586.0" mnemonicParsing="false" onAction="#back" text="Back">
+      <ListView fx:id="listView" fixedCellSize="21.0" layoutX="174.0" layoutY="131.0" prefHeight="215.0" prefWidth="255.0" />
+      <Button layoutX="266.0" layoutY="355.0" mnemonicParsing="false" onAction="#back" text="Back">
          <font>
             <Font size="21.0" />
          </font></Button>

@@ -38,7 +38,7 @@ public class GameBoardController implements Initializable {
     private int choice;
     private int multiplier = 1;
     private int wcount = 0;
-    private int velocity_x;
+    private int velocity;
     private int velocity_y;
     private Character lastkey = null;
     private Character playkey = null;
@@ -73,7 +73,7 @@ public class GameBoardController implements Initializable {
         key_input_Setup();
         ball = new Ball(circle);
         GenerateBrick();
-        paddle.setLayoutX(320 - paddle.getWidth()/2);
+        paddle.setLayoutX(300 - paddle.getWidth()/2);
     }
 
     public void GenerateBrick() {
@@ -89,13 +89,13 @@ public class GameBoardController implements Initializable {
         }
         for (int i = 0; i<3;i++){//1 for debugging. Release is 3
             if (i%2 != 0) {
-                Rectangle rectangle = new Rectangle(0,k,32,30);
+                Rectangle rectangle = new Rectangle(0,k,30,20);
                 rectangle.setFill(color);
                 rectangle.setStroke(Color.BLACK);
                 scene.getChildren().add(rectangle);
                 bricks.add(rectangle);
                 for (int j = 0; j<10;j++){
-                    Rectangle rectangle2 = new Rectangle((32+(j*64)),k,64,30);
+                    Rectangle rectangle2 = new Rectangle((30+(j*60)),k,60,20);
                     rectangle2.setFill(color);
                     rectangle2.setStroke(Color.BLACK);
                     scene.getChildren().add(rectangle2);
@@ -103,14 +103,14 @@ public class GameBoardController implements Initializable {
                 }
             } else {
                 for (int j = 0; j<10;j++){
-                    Rectangle rectangle = new Rectangle((j*64),k,64,30);
+                    Rectangle rectangle = new Rectangle((j*60),k,60,20);
                     rectangle.setFill(color);
                     rectangle.setStroke(Color.BLACK);
                     scene.getChildren().add(rectangle);
                     bricks.add(rectangle);
                 }
             }
-            k+=30;
+            k+=20;
 
         }
     }
@@ -122,24 +122,6 @@ public class GameBoardController implements Initializable {
             boolean leftBorder = circle.getLayoutX() <= (brick.getX() + circle.getRadius());
             boolean bottomBorder = circle.getLayoutY() >= ((brick.getY() + brick.getHeight()) - circle.getRadius());
             boolean topBorder = circle.getLayoutY() <= (brick.getY() + circle.getRadius());
-
-//            if (bottomBorder && rightBorder && (ball.velocity_x > 0)) {
-//                System.out.println("true");
-//                ball.reverse_y();
-//            }
-//            if ((bottomBorder || topBorder) && (leftBorder || rightBorder)) {
-//                System.out.println("not true");
-//                ball.reverse_x();
-//                ball.reverse_y();
-//            } else {
-//                if (bottomBorder || topBorder) {
-//                    ball.reverse_y();
-//                }
-//                if (rightBorder || leftBorder) {
-//                    ball.reverse_x();
-//                }
-//            }
-
 
             if (leftBorder && bottomBorder) {
                 if (ball.velocity_x < 0) {
@@ -233,7 +215,7 @@ public class GameBoardController implements Initializable {
                 if (ball_count == 1) {
                     heart2.setVisible(false);
                 }
-                paddle.setLayoutX(320 - (paddle.getWidth()/2));
+                paddle.setLayoutX(300 - (paddle.getWidth()/2));
                 System.out.println("health: " + ball_count);
                 if (ball_count == 0) {
                     GameOver();
@@ -276,24 +258,24 @@ public class GameBoardController implements Initializable {
     public void NextLevel(ActionEvent event) {
         //check extra level
         if (blitz_mode) {
-            if (paddle.getWidth() > 90) {
+            if (paddle.getWidth() > 60) {
                 paddle.setWidth(paddle.getWidth() - 30);
             }
             //more level
-            if (paddle.getWidth() <= 90) {
+            if (paddle.getWidth() <= 60) {
                 ball.velocity_x++;
                 ball.velocity_y++;
             }
         }
         ball.moving(false);
-        circle.setLayoutX(320);
-        circle.setLayoutY(690);//180 for debugging. release is 690
-        paddle.setLayoutX(320 - paddle.getWidth()/2);
+        circle.setLayoutX(300);
+        circle.setLayoutY(419);//180 for debugging. release is 690
+        paddle.setLayoutX(300 - paddle.getWidth()/2);
         bricks.clear();
         level++;
         playkey = null;
         GenerateBrick();
-        label.setText("Press W to start");
+        label.setText("Press S to start");
         Next_level.setVisible(false);
     }
 
@@ -307,18 +289,18 @@ public class GameBoardController implements Initializable {
                 dPressed.set(true);
             }
 
-            if(e.getCode() == KeyCode.W) {
-                if (playkey == null || playkey != 'W'){
-                    playkey = 'W';
+            if(e.getCode() == KeyCode.S) {
+                if (playkey == null || playkey != 'S'){
+                    playkey = 'S';
                     wPressed = true;
-                    ball.get_ball_movement(choice);
+                    ball.get_ball_movement(velocity);
                     label.setVisible(false);
                 }
             }
 
-            if(e.getCode() == KeyCode.Q) {
-                if (lastkey == null || lastkey != 'Q'){
-                    lastkey = 'Q';
+            if(e.getCode() == KeyCode.W) {
+                if (lastkey == null || lastkey != 'W'){
+                    lastkey = 'W';
                     paused();
                 }
             }
@@ -333,7 +315,7 @@ public class GameBoardController implements Initializable {
                 dPressed.set(false);
             }
 
-            if(e.getCode() == KeyCode.Q) {
+            if(e.getCode() == KeyCode.W) {
                 lastkey = null;
             }
 
@@ -357,7 +339,7 @@ public class GameBoardController implements Initializable {
                 label.setVisible(false);
             }
             leave.setVisible(false);
-            label.setText(" Press W to start");
+            label.setText(" Press S to start");
             System.out.println("Game resume");
         }
     }
@@ -389,29 +371,34 @@ public class GameBoardController implements Initializable {
         this.choice = choice;
         switch (choice) {
             case 1:
-                paddle.setWidth(390);
+                paddle.setWidth(210);
                 multiplier = 25;
-                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                velocity = 1;
+                paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
             case 2:
-                paddle.setWidth(240);
+                paddle.setWidth(150);
                 multiplier = 50;
-                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                velocity = 2;
+                paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
             case 3:
-                paddle.setWidth(180);
+                paddle.setWidth(120);
                 multiplier = 100;
-                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                velocity = 2;
+                paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
             case 4:
-                paddle.setWidth(150);
+                paddle.setWidth(120);
                 multiplier = 150;
-                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                velocity = 3;
+                paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
             case 5:
-                paddle.setWidth(120);
+                paddle.setWidth(90);
                 multiplier = 200;
-                paddle.setLayoutX(320 - paddle.getWidth()/2);
+                velocity = 3;
+                paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
         }
     }
