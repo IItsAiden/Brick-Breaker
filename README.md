@@ -19,6 +19,8 @@ More information about the [Brick Breaker](https://heroconcept.com/a-brief-histo
 
 - Adjust the steel brick from being probability to a fix number of 3 hits. Reason being there is no clear indication of how many hits it takes to break which lead to player thinking the game is bug and the brick is unbreakable.
 
+- Player.java has been merge with GameController.java as the GUI related code has been move to fxml.
+
 ---
 
 ### Addition Feature
