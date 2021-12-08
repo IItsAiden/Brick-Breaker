@@ -38,7 +38,7 @@ public class GameOverController implements Initializable {
         label.setText(score.toString());
     }
 
-    public void Home(ActionEvent event) throws IOException {
+    public void Next(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("FinalScore.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -80,7 +80,6 @@ public class GameOverController implements Initializable {
             }
             myReader.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }

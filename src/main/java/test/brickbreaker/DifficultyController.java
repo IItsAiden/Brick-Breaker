@@ -21,7 +21,7 @@ public class DifficultyController {
     @FXML
     private Label Description, paddle, ball, multiplier;
 
-    public void get_difficulty(ActionEvent event) {
+    public void get_difficulty() {
 
         if (rb1.isSelected()){
             Description.setText(rb1.getText());
@@ -66,7 +66,6 @@ public class DifficultyController {
         Scene scene = new Scene(fxmlLoader.load());
         TutorialController controller = fxmlLoader.getController();
         controller.get_choice(choice);
-        System.out.println(choice);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);

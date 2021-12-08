@@ -5,8 +5,8 @@ import javafx.scene.shape.Rectangle;
 
 public class Ball {
     private final Circle ball;
-    public int velocity_x;
-    public int velocity_y;
+    public Double velocity_x;
+    public double velocity_y;
 
     public Ball(Circle ball) {
         this.ball = ball;
@@ -88,8 +88,8 @@ public class Ball {
         }
     }
 
-    public void get_ball_movement(Integer velocity) {
-        velocity_x = velocity;
-        velocity_y = velocity + 1;
+    public void get_ball_movement(Double x, Double y) {
+        velocity_x = x;
+        velocity_y = y;
     }
 }

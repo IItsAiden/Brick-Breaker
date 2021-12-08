@@ -19,7 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -27,8 +26,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable {
-    //test
-    //test3
 
     private Ball ball;
     private ArrayList<Rectangle> bricks = new ArrayList<>();
@@ -37,14 +34,14 @@ public class GameBoardController implements Initializable {
     private int ball_count = 3;
     private int score = 0;
     private boolean blitz_mode = false;
-    private int choice;
     private int multiplier = 1;
-    private int wcount = 0;
-    private int velocity;
-    private int velocity_y;
-    private Character lastkey = null;
-    private Character playkey = null;
-    private boolean already = false;
+    private double velocity_x;
+    private double velocity_y;
+
+    private int paddle_speed;
+    private Character pause_key = null;
+    private Character start_key = null;
+    private boolean collided = false;
 
     @FXML
     private Circle circle;
@@ -70,24 +67,20 @@ public class GameBoardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         timer.start();
         key_input_Setup();
-        ball = new Ball(circle);
         GenerateBrick();
+        ball = new Ball(circle);
         paddle.setLayoutX(300 - paddle.getWidth()/2);
     }
 
     public void GenerateBrick() {
-
         int k = 0;
-        Color color = Color.LIMEGREEN;//Red for debugging.release is limegreen
+        Color color = Color.LIMEGREEN;//Red for debugging
         if (level == 1) {
             color = Color.RED;
         } else if (level == 2) {
             color = Color.ORANGE;
-        } else if (level == 3) {
-            color = Color.LIMEGREEN;//Red for debugging.release is limegreen
         }
         for (int i = 0; i<3;i++){//1 for debugging. Release is 3
             if (i%2 != 0) {
@@ -113,13 +106,12 @@ public class GameBoardController implements Initializable {
                 }
             }
             k+=20;
-
         }
     }
 
     public boolean CheckBrickCollision(Rectangle brick) {
-        if (circle.getBoundsInParent().intersects(brick.getBoundsInParent()) && !already){
-            already = true;
+        if (circle.getBoundsInParent().intersects(brick.getBoundsInParent()) && !collided){
+            collided = true;
             boolean rightBorder = circle.getLayoutX() >= ((brick.getX() + brick.getWidth()) - circle.getRadius());
             boolean leftBorder = circle.getLayoutX() <= (brick.getX() + circle.getRadius());
             boolean bottomBorder = circle.getLayoutY() >= ((brick.getY() + brick.getHeight()) - circle.getRadius());
@@ -128,14 +120,11 @@ public class GameBoardController implements Initializable {
             if (leftBorder && bottomBorder) {
                 if (ball.velocity_x < 0) {
                     ball.reverse_y();
-                    System.out.println("down");
                 } else if (ball.velocity_y < 0) {
                     ball.reverse_x();
-                    System.out.println("left");
                 } else {
                     ball.reverse_x();
                     ball.reverse_y();
-                    System.out.println("opposite");
                 }
             } else if (rightBorder && topBorder) {
                 if (ball.velocity_x > 0) {
@@ -157,7 +146,6 @@ public class GameBoardController implements Initializable {
                 }
             } else if (rightBorder && bottomBorder) {
                 if (ball.velocity_x > 0) {
-                    System.out.println("down");
                     ball.reverse_y();
                 } else if (ball.velocity_y < 0) {
                     ball.reverse_x();
@@ -174,23 +162,18 @@ public class GameBoardController implements Initializable {
                 }
             }
 
-
-
             switch (getBrickState(brick)) {
                 case 3:
                     brick.setFill(Color.ORANGE);
                     score = score + multiplier;
-                    System.out.println("Score:" + score);
                     break;
                 case 2:
                     brick.setFill(Color.RED);
                     score = score + multiplier;
-                    System.out.println("Score:" + score);
                     break;
                 case 1:
                     scene.getChildren().remove(brick);
                     score = score + multiplier;
-                    System.out.println("Score:" + score);
                     return true;
             }
         }
@@ -201,15 +184,15 @@ public class GameBoardController implements Initializable {
 
         @Override
         public void handle(long timestamp) {
-
             onscreen_score.setText(String.valueOf(score));
-
             ball.checkCollisionScene();
             ball.checkCollisionPaddle(paddle);
+
             if (ball.checkCollisionBottomZone()) {
                 ball.moving(false);
+                paddle.setLayoutX(300 - (paddle.getWidth()/2));
                 wPressed = false;
-                playkey = null;
+                start_key = null;
                 ball_count--;
                 if (ball_count == 2) {
                     heart1.setVisible(false);
@@ -217,23 +200,20 @@ public class GameBoardController implements Initializable {
                 if (ball_count == 1) {
                     heart2.setVisible(false);
                 }
-                paddle.setLayoutX(300 - (paddle.getWidth()/2));
-                System.out.println("health: " + ball_count);
                 if (ball_count == 0) {
                     GameOver();
                 }
             }
 
-            int paddle_movement = 6;
             if(aPressed.get() && wPressed){
                 if(paddle.getLayoutX() > 0) {
-                    paddle.setLayoutX(paddle.getLayoutX() - paddle_movement);
+                    paddle.setLayoutX(paddle.getLayoutX() - paddle_speed);
                 }
             }
 
             if(dPressed.get() && wPressed){
-                if(paddle.getLayoutX() < (640 - paddle.getWidth())) {
-                    paddle.setLayoutX(paddle.getLayoutX() + paddle_movement);
+                if(paddle.getLayoutX() < (600 - paddle.getWidth())) {
+                    paddle.setLayoutX(paddle.getLayoutX() + paddle_speed);
                 }
             }
 
@@ -253,11 +233,11 @@ public class GameBoardController implements Initializable {
                     blitz_mode = true;
                 }
             }
-            already = false;
+            collided = false;
         }
     };
 
-    public void NextLevel(ActionEvent event) {
+    public void NextLevel() {
         //check extra level
         if (blitz_mode) {
             if (paddle.getWidth() > 60) {
@@ -265,6 +245,7 @@ public class GameBoardController implements Initializable {
             }
             //more level
             if (paddle.getWidth() <= 60) {
+                paddle_speed++;
                 ball.velocity_x++;
                 ball.velocity_y++;
             }
@@ -275,7 +256,7 @@ public class GameBoardController implements Initializable {
         paddle.setLayoutX(300 - paddle.getWidth()/2);
         bricks.clear();
         level++;
-        playkey = null;
+        start_key = null;
         GenerateBrick();
         label.setText("Press S to start");
         Next_level.setVisible(false);
@@ -292,17 +273,17 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.S) {
-                if (playkey == null || playkey != 'S'){
-                    playkey = 'S';
+                if (start_key == null || start_key != 'S'){
+                    start_key = 'S';
                     wPressed = true;
-                    ball.get_ball_movement(velocity);
+                    ball.get_ball_movement(velocity_x, velocity_y);
                     label.setVisible(false);
                 }
             }
 
             if(e.getCode() == KeyCode.W) {
-                if (lastkey == null || lastkey != 'W'){
-                    lastkey = 'W';
+                if (pause_key == null || pause_key != 'W'){
+                    pause_key = 'W';
                     paused();
                 }
             }
@@ -318,16 +299,12 @@ public class GameBoardController implements Initializable {
             }
 
             if(e.getCode() == KeyCode.W) {
-                lastkey = null;
-            }
-
-            if(e.getCode() == KeyCode.W) {
+                pause_key = null;
             }
         });
     }
 
     public void paused() {
-
         paused = !paused;
         if(paused) {
             timer.stop();
@@ -363,43 +340,51 @@ public class GameBoardController implements Initializable {
 
     public int  getBrickState(Rectangle brick) {
         int HP = 3;
-        if(brick.getFill() == Color.LIMEGREEN) HP = 3;
-        else if (brick.getFill() == Color.ORANGE) HP = 2;
+        if (brick.getFill() == Color.ORANGE) HP = 2;
         else if (brick.getFill() == Color.RED) HP = 1;
         return HP;
     }
 
     public void get_choice(Integer choice) {
-        this.choice = choice;
         switch (choice) {
             case 1:
-                paddle.setWidth(210);
+                paddle.setWidth(150);
+                paddle_speed = 2;
                 multiplier = 25;
-                velocity = 1;
+                velocity_x = 0.5;
+                velocity_y = 1.0;
                 paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
             case 2:
                 paddle.setWidth(150);
+                paddle_speed = 3;
                 multiplier = 50;
-                velocity = 2;
+                velocity_x = 1;
+                velocity_y = 2;
                 paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
             case 3:
                 paddle.setWidth(120);
+                paddle_speed = 3;
                 multiplier = 100;
-                velocity = 2;
+                velocity_x = 1;
+                velocity_y = 2;
                 paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
             case 4:
                 paddle.setWidth(120);
+                paddle_speed = 4;
                 multiplier = 150;
-                velocity = 3;
+                velocity_x = 2;
+                velocity_y = 3;
                 paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
             case 5:
                 paddle.setWidth(90);
+                paddle_speed = 5;
                 multiplier = 200;
-                velocity = 3;
+                velocity_x = 3;
+                velocity_y = 4;
                 paddle.setLayoutX(300 - paddle.getWidth()/2);
                 break;
         }

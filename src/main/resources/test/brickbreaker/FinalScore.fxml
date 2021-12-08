@@ -43,7 +43,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="error" layoutX="110.0" layoutY="288.0" text="Username can not contain ," visible="false">
+      <Label fx:id="invalid" layoutX="110.0" layoutY="288.0" text="Username can not contain ," visible="false">
          <font>
             <Font size="15.0" />
          </font>

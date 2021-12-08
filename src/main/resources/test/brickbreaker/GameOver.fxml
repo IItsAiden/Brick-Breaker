@@ -14,7 +14,7 @@
             <Image url="@../../img/GameOver.jpg" />
          </image>
       </ImageView>
-        <Button layoutX="330.0" layoutY="339.0" mnemonicParsing="false" onAction="#Home" text="Next">
+        <Button layoutX="330.0" layoutY="339.0" mnemonicParsing="false" onAction="#Next" text="Next">
          <font>
             <Font size="21.0" />
          </font></Button>

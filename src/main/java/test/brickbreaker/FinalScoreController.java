@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -24,8 +23,6 @@ public class FinalScoreController implements Initializable {
     ArrayList<String> list = new ArrayList<String>();
     private int score;
     private boolean save = false;
-    private String username;
-    private String userinput;
 
     @FXML
     private Button button;
@@ -34,17 +31,13 @@ public class FinalScoreController implements Initializable {
     private ListView<String> listView;
 
     @FXML
-    private Label label, error;
-
-    @FXML
-    private Label nice;
+    private Label label, invalid, nice;
 
     @FXML
     private TextField textField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         Leaderboard();
         System.out.println(list);
         listView.getItems().addAll(list);
@@ -56,7 +49,6 @@ public class FinalScoreController implements Initializable {
         this.save = save;
         label.setText(score.toString());
         if (save) {
-
             button.setText("Save");
             nice.setText("Congraz!! New High Score!");
         }
@@ -79,26 +71,22 @@ public class FinalScoreController implements Initializable {
     }
 
     public void Next(ActionEvent event) throws IOException {
-        userinput = textField.getText();
         if (textField.getText() == null || textField.getText().trim().isEmpty()) {
-            error.setText("Please enter username");
-            error.setVisible(true);
-        } else if (userinput.contains(",")) {
-            error.setText("Username can not contain ,");
-            error.setVisible(true);
+            invalid.setText("Please enter username");
+            invalid.setVisible(true);
+        } else if (textField.getText().contains(",")) {
+            invalid.setText("Username can not contain ,");
+            invalid.setVisible(true);
         } else {
             if (save) {
-                add_highscore();
-
+                add_score();
                 try {
                     PrintWriter myWriter = new PrintWriter("src/main/resources/Leaderboard.txt");
                     for (String s : list) {
                         myWriter.println(s);
                     }
                     myWriter.close();
-                    System.out.println("Successfully wrote to the file.");
                 } catch (IOException e) {
-                    System.out.println("An error occurred.");
                     e.printStackTrace();
                 }
                 FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
@@ -119,32 +107,25 @@ public class FinalScoreController implements Initializable {
         }
     }
 
-    public void add_highscore() {
-        username = textField.getText();
+    public void add_score() {
+        String username = textField.getText();
         username = username.replaceAll("\\s+","");
         username = username + "," + score;
         int counter = 0;
         boolean added = false;
         for (int i = 0; i < list.size();i ++) {
             counter++;
-
             String[] array;
             array = list.get(i).split(",");
             if (score >= Integer.parseInt(array[1])) {
-                list.add(i,username);
+                list.add(i, username);
                 added = true;
                 System.out.println("Final:" + list);
                 break;
             }
-
-//            if (score >= Integer.parseInt(list.get(i))) {
-//                System.out.println("Yes");
-//                break;
-//            }
         }
         if (counter < 10 && !added) {
             list.add(username);
         }
-
     }
 }

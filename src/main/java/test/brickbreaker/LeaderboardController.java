@@ -30,7 +30,6 @@ public class LeaderboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         Leaderboard();
         System.out.println(list);
         listView.getItems().addAll(list);
@@ -63,7 +62,6 @@ public class LeaderboardController implements Initializable {
             }
             myReader.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
