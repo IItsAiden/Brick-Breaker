@@ -25,8 +25,8 @@ public class DifficultyController {
 
         if (rb1.isSelected()){
             Description.setText(rb1.getText());
-            paddle.setText("Very long paddle");
-            ball.setText("Very slow ball speed");
+            paddle.setText("Original paddle");
+            ball.setText("Original ball speed");
             multiplier.setText("25");
             choice = 1;
         }

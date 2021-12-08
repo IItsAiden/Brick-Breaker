@@ -30,7 +30,7 @@ public class GameBoardController implements Initializable {
     private Ball ball;
     private ArrayList<Rectangle> bricks = new ArrayList<>();
     private boolean paused = false;
-    private int level = 1;//3 for debugging. release is 1
+    private int level = 4;//3 for debugging. release is 1
     private int ball_count = 3;
     private int score = 0;
     private boolean blitz_mode = false;
@@ -76,30 +76,49 @@ public class GameBoardController implements Initializable {
 
     public void GenerateBrick() {
         int k = 0;
-        Color color = Color.LIMEGREEN;//Red for debugging
-        if (level == 1) {
-            color = Color.RED;
-        } else if (level == 2) {
+        Color color = Color.RED;
+        Color color2 = Color.RED;
+        if (level == 2) {
             color = Color.ORANGE;
+        } else if (level == 3) {
+            color = Color.LIMEGREEN;
+            color2 = Color.ORANGE;
+        } else if (level > 3) {
+            color = Color.LIMEGREEN;
+            color2 = Color.LIMEGREEN;
         }
         for (int i = 0; i<3;i++){//1 for debugging. Release is 3
             if (i%2 != 0) {
                 Rectangle rectangle = new Rectangle(0,k,30,20);
-                rectangle.setFill(color);
+                int counter = 1;
+                rectangle.setFill(color2);
                 rectangle.setStroke(Color.BLACK);
                 scene.getChildren().add(rectangle);
                 bricks.add(rectangle);
                 for (int j = 0; j<10;j++){
                     Rectangle rectangle2 = new Rectangle((30+(j*60)),k,60,20);
-                    rectangle2.setFill(color);
+                    if (counter == 1 || counter == 2) {
+                        rectangle2.setFill(color);
+                        counter++;
+                    } else {
+                        rectangle2.setFill(color2);
+                        counter = 1;
+                    }
                     rectangle2.setStroke(Color.BLACK);
                     scene.getChildren().add(rectangle2);
                     bricks.add(rectangle2);
                 }
             } else {
+                int counter = 2;
                 for (int j = 0; j<10;j++){
                     Rectangle rectangle = new Rectangle((j*60),k,60,20);
-                    rectangle.setFill(color);
+                    if (counter == 1 || counter == 2) {
+                        rectangle.setFill(color2);
+                    } else {
+                        rectangle.setFill(color);
+                        counter = 0;
+                    }
+                    counter++;
                     rectangle.setStroke(Color.BLACK);
                     scene.getChildren().add(rectangle);
                     bricks.add(rectangle);
