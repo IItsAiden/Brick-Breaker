@@ -27,21 +27,28 @@ import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable {
 
+    private final Brick brick = new Brick(this);
+    private final ArrayList<Rectangle> bricks = new ArrayList<>();
+
     private Ball ball;
-    private ArrayList<Rectangle> bricks = new ArrayList<>();
-    private boolean paused = false;
-    private int level = 4;//3 for debugging. release is 1
     private int ball_count = 3;
-    private int score = 0;
-    private boolean blitz_mode = false;
-    private int multiplier = 1;
     private double velocity_x;
     private double velocity_y;
 
+    private int score = 0;
+    private int multiplier;
     private int paddle_speed;
-    private Character pause_key = null;
     private Character start_key = null;
+
+    private int level = 1;//3 for debugging. release is 1
     private boolean collided = false;
+    private boolean paused = false;
+    private Character pause_key = null;
+    private boolean blitz_mode = false;
+
+    private final BooleanProperty aPressed = new SimpleBooleanProperty();
+    private final BooleanProperty dPressed = new SimpleBooleanProperty();
+    private Boolean start_pressed = false;
 
     @FXML
     private Circle circle;
@@ -53,83 +60,29 @@ public class GameBoardController implements Initializable {
     private Rectangle paddle;
 
     @FXML
-    private Label label, onscreen_score;
+    private Label description, onscreen_score;
 
     @FXML
-    private Button Next_level, leave;
+    private Button nextLevel, leave;
 
     @FXML
     private ImageView heart1, heart2;
 
-    private final BooleanProperty aPressed = new SimpleBooleanProperty();
-    private final BooleanProperty dPressed = new SimpleBooleanProperty();
-    private Boolean wPressed = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         timer.start();
         key_input_Setup();
-        GenerateBrick();
+        brick.GenerateBrick();
         ball = new Ball(circle);
         paddle.setLayoutX(300 - paddle.getWidth()/2);
     }
 
-    public void GenerateBrick() {
-        int k = 0;
-        Color color = Color.RED;
-        Color color2 = Color.RED;
-        if (level == 2) {
-            color = Color.ORANGE;
-        } else if (level == 3) {
-            color = Color.LIMEGREEN;
-            color2 = Color.ORANGE;
-        } else if (level > 3) {
-            color = Color.LIMEGREEN;
-            color2 = Color.LIMEGREEN;
-        }
-        for (int i = 0; i<3;i++){//1 for debugging. Release is 3
-            if (i%2 != 0) {
-                Rectangle rectangle = new Rectangle(0,k,30,20);
-                int counter = 1;
-                rectangle.setFill(color2);
-                rectangle.setStroke(Color.BLACK);
-                scene.getChildren().add(rectangle);
-                bricks.add(rectangle);
-                for (int j = 0; j<10;j++){
-                    Rectangle rectangle2 = new Rectangle((30+(j*60)),k,60,20);
-                    if (counter == 1 || counter == 2) {
-                        rectangle2.setFill(color);
-                        counter++;
-                    } else {
-                        rectangle2.setFill(color2);
-                        counter = 1;
-                    }
-                    rectangle2.setStroke(Color.BLACK);
-                    scene.getChildren().add(rectangle2);
-                    bricks.add(rectangle2);
-                }
-            } else {
-                int counter = 2;
-                for (int j = 0; j<10;j++){
-                    Rectangle rectangle = new Rectangle((j*60),k,60,20);
-                    if (counter == 1 || counter == 2) {
-                        rectangle.setFill(color2);
-                    } else {
-                        rectangle.setFill(color);
-                        counter = 0;
-                    }
-                    counter++;
-                    rectangle.setStroke(Color.BLACK);
-                    scene.getChildren().add(rectangle);
-                    bricks.add(rectangle);
-                }
-            }
-            k+=20;
-        }
-    }
-
     public boolean CheckBrickCollision(Rectangle brick) {
+
         if (circle.getBoundsInParent().intersects(brick.getBoundsInParent()) && !collided){
+
             collided = true;
             boolean rightBorder = circle.getLayoutX() >= ((brick.getX() + brick.getWidth()) - circle.getRadius());
             boolean leftBorder = circle.getLayoutX() <= (brick.getX() + circle.getRadius());
@@ -184,15 +137,15 @@ public class GameBoardController implements Initializable {
             switch (getBrickState(brick)) {
                 case 3:
                     brick.setFill(Color.ORANGE);
-                    score = score + multiplier;
+                    score += multiplier;
                     break;
                 case 2:
                     brick.setFill(Color.RED);
-                    score = score + multiplier;
+                    score += multiplier;
                     break;
                 case 1:
                     scene.getChildren().remove(brick);
-                    score = score + multiplier;
+                    score += multiplier;
                     return true;
             }
         }
@@ -203,16 +156,18 @@ public class GameBoardController implements Initializable {
 
         @Override
         public void handle(long timestamp) {
+
             onscreen_score.setText(String.valueOf(score));
+
             ball.checkCollisionScene();
             ball.checkCollisionPaddle(paddle);
-
             if (ball.checkCollisionBottomZone()) {
+
                 ball.moving(false);
-                paddle.setLayoutX(300 - (paddle.getWidth()/2));
-                wPressed = false;
-                start_key = null;
                 ball_count--;
+                paddle.setLayoutX(300 - (paddle.getWidth()/2));
+                start_pressed = false;
+                start_key = null;
                 if (ball_count == 2) {
                     heart1.setVisible(false);
                 }
@@ -224,19 +179,19 @@ public class GameBoardController implements Initializable {
                 }
             }
 
-            if(aPressed.get() && wPressed){
+            if(aPressed.get() && start_pressed){
                 if(paddle.getLayoutX() > 0) {
                     paddle.setLayoutX(paddle.getLayoutX() - paddle_speed);
                 }
             }
 
-            if(dPressed.get() && wPressed){
+            if(dPressed.get() && start_pressed){
                 if(paddle.getLayoutX() < (600 - paddle.getWidth())) {
                     paddle.setLayoutX(paddle.getLayoutX() + paddle_speed);
                 }
             }
 
-            if(wPressed){
+            if(start_pressed){
                 ball.moving(true);
             }
 
@@ -244,10 +199,10 @@ public class GameBoardController implements Initializable {
                 bricks.removeIf(brick -> CheckBrickCollision(brick));
             } else {
                 ball.moving(false);
-                wPressed = false;
-                label.setText("Level Cleared!");
-                label.setVisible(true);
-                Next_level.setVisible(true);
+                start_pressed = false;
+                description.setText("Level Cleared!");
+                description.setVisible(true);
+                nextLevel.setVisible(true);
                 if(level >= 3) {
                     blitz_mode = true;
                 }
@@ -257,28 +212,27 @@ public class GameBoardController implements Initializable {
     };
 
     public void NextLevel() {
-        //check extra level
+
         if (blitz_mode) {
             if (paddle.getWidth() > 60) {
                 paddle.setWidth(paddle.getWidth() - 30);
             }
-            //more level
             if (paddle.getWidth() <= 60) {
                 paddle_speed++;
                 ball.velocity_x++;
                 ball.velocity_y++;
             }
         }
+
         ball.moving(false);
         circle.setLayoutX(300);
-        circle.setLayoutY(419);//180 for debugging. release is 690
+        circle.setLayoutY(419);
         paddle.setLayoutX(300 - paddle.getWidth()/2);
-        bricks.clear();
+        brick.GenerateBrick();
         level++;
         start_key = null;
-        GenerateBrick();
-        label.setText("Press S to start");
-        Next_level.setVisible(false);
+        description.setText("Press S to start");
+        nextLevel.setVisible(false);
     }
 
     public void key_input_Setup(){
@@ -294,9 +248,9 @@ public class GameBoardController implements Initializable {
             if(e.getCode() == KeyCode.S) {
                 if (start_key == null || start_key != 'S'){
                     start_key = 'S';
-                    wPressed = true;
+                    start_pressed = true;
                     ball.get_ball_movement(velocity_x, velocity_y);
-                    label.setVisible(false);
+                    description.setVisible(false);
                 }
             }
 
@@ -327,18 +281,16 @@ public class GameBoardController implements Initializable {
         paused = !paused;
         if(paused) {
             timer.stop();
-            label.setVisible(true);
-            label.setText("Game Paused");
-            System.out.println("Game paused");
+            description.setVisible(true);
+            description.setText("Game Paused");
             leave.setVisible(true);
         } else {
             timer.start();
-            if (wPressed) {
-                label.setVisible(false);
+            if (start_pressed) {
+                description.setVisible(false);
             }
             leave.setVisible(false);
-            label.setText(" Press S to start");
-            System.out.println("Game resume");
+            description.setText(" Press S to start");
         }
     }
 
@@ -425,7 +377,18 @@ public class GameBoardController implements Initializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public ArrayList<Rectangle> getBricks() {
+        return bricks;
+    }
+
+    public AnchorPane getScene() {
+        return scene;
     }
 }

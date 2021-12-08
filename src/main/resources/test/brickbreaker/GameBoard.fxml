@@ -19,12 +19,12 @@
         <Rectangle fx:id="paddle" arcHeight="5.0" arcWidth="5.0" fill="#267871" height="9.0" layoutX="220.0" layoutY="429.0" stroke="#134e5e" strokeType="INSIDE" width="160.0" />
         <Circle fx:id="circle" fill="#004777" layoutX="300.0" layoutY="419.0" radius="9.0" stroke="#134e5e" strokeType="INSIDE" />
         <Button layoutX="295.0" layoutY="-61.0" mnemonicParsing="false" text="Button" />
-      <Label fx:id="label" layoutX="108.0" layoutY="161.0" text="Press S to start" textFill="WHITE">
+      <Label fx:id="description" layoutX="108.0" layoutY="161.0" text="Press S to start" textFill="WHITE">
          <font>
             <Font size="54.0" />
          </font>
       </Label>
-      <Button fx:id="Next_level" layoutX="233.0" layoutY="257.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" visible="false">
+      <Button fx:id="nextLevel" layoutX="233.0" layoutY="257.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" visible="false">
          <font>
             <Font size="21.0" />
          </font></Button>
