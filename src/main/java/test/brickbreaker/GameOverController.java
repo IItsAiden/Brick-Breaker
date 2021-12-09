@@ -15,14 +15,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+/**
+ * Controller for Game Over scene
+ */
 public class GameOverController implements Initializable {
 
     ArrayList<String> list = new ArrayList<String>();
-    ArrayList<String> top_ten = new ArrayList<String>();
     private int score;
 
     @FXML
@@ -30,28 +31,44 @@ public class GameOverController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Leaderboard();
+        get_leaderboard();
     }
 
-    void high_score(Integer score) {
+    /**
+     * Get player score
+     *
+     * @param score player score
+     */
+    void get_score(Integer score) {
         this.score = score;
         label.setText(score.toString());
     }
 
+    /**
+     * Go to the final scene
+     *
+     * @param event require to get the stage for the scene
+     * @throws IOException when the scene can not be loaded
+     */
     public void Next(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("FinalScore.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         FinalScoreController controller = fxmlLoader.getController();
-        controller.get_score(score, check_new_highscore());
+        controller.get_score(score, check_new_record());
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
-    public Boolean check_new_highscore() {
-        int counter = 0;//patch fix unable to save when leaderboard have less than 10 highscore
+    /**
+     * Check if player make a new record
+     *
+     * @return true if player make a new record. False otherwise
+     */
+    public boolean check_new_record() {
+        int counter = 0;
         for (String s : list) {
             counter++;
             String[] array;
@@ -60,10 +77,13 @@ public class GameOverController implements Initializable {
                 return true;
             }
         }
-        return counter < 10;//patch fix unable to save when leaderboard have less than 10 highscore
+        return counter < 10;
     }
 
-    public void Leaderboard() {
+    /**
+     * Get the data of the leaderboard
+     */
+    public void get_leaderboard() {
         try {
             File myObj = new File("src/main/resources/Leaderboard.txt");
             if (myObj.createNewFile()) {

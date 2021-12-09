@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+/**
+ * Controller for Final Score scene
+ */
 public class FinalScoreController implements Initializable {
 
     ArrayList<String> list = new ArrayList<String>();
@@ -38,12 +41,17 @@ public class FinalScoreController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Leaderboard();
+        get_leaderboard();
         System.out.println(list);
         listView.getItems().addAll(list);
     }
 
-    void get_score(Integer score, Boolean save) {
+    /**
+     * Get score and if there is a new record
+     * @param score player score
+     * @param save true if there is a new record
+     */
+    void get_score(Integer score, boolean save) {
 
         this.score = score;
         this.save = save;
@@ -54,7 +62,10 @@ public class FinalScoreController implements Initializable {
         }
     }
 
-    public void Leaderboard() {
+    /**
+     * Get the data of the leaderboard
+     */
+    public void get_leaderboard() {
         try {
             File myObj = new File("src/main/resources/Leaderboard.txt");
             int counter = 0;
@@ -70,6 +81,12 @@ public class FinalScoreController implements Initializable {
         }
     }
 
+    /**
+     * Save the new record if there is one then back to home menu scene. Else back to home menu scene
+     *
+     * @param event require to get the stage for the scene
+     * @throws IOException when the scene can not be loaded
+     */
     public void Next(ActionEvent event) throws IOException {
         if (textField.getText() == null || textField.getText().trim().isEmpty()) {
             invalid.setText("Please enter username");
@@ -107,6 +124,9 @@ public class FinalScoreController implements Initializable {
         }
     }
 
+    /**
+     * Add the score to the list before saving
+     */
     public void add_score() {
         String username = textField.getText();
         username = username.replaceAll("\\s+","");
@@ -120,7 +140,6 @@ public class FinalScoreController implements Initializable {
             if (score >= Integer.parseInt(array[1])) {
                 list.add(i, username);
                 added = true;
-                System.out.println("Final:" + list);
                 break;
             }
         }

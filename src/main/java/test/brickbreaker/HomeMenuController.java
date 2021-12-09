@@ -10,8 +10,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for main scene
+ */
 public class HomeMenuController {
 
+    /**
+     * Go to the select difficulty scene
+     *
+     * @param event require to get the stage for the scene
+     * @throws IOException when the scene can not be loaded
+     */
     public void start(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("Difficulty.fxml"));
@@ -22,6 +31,12 @@ public class HomeMenuController {
         stage.show();
     }
 
+    /**
+     * Go to the leaderboard scene
+     *
+     * @param event require to get the stage for the scene
+     * @throws IOException when the scene can not be loaded
+     */
     public void leaderboard(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("Leaderboard.fxml"));
@@ -32,6 +47,11 @@ public class HomeMenuController {
         stage.show();
     }
 
+    /**
+     * Quit the game
+     *
+     * @param event require to get the stage for the scene
+     */
     public void exit(ActionEvent event) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

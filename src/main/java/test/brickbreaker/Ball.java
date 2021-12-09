@@ -3,23 +3,35 @@ package test.brickbreaker;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * The Ball class
+ */
 public class Ball {
     private final Circle ball;
-    public Double velocity_x;
+    public double velocity_x;
     public double velocity_y;
 
     public Ball(Circle ball) {
         this.ball = ball;
     }
 
+    /**
+     * Control the ball moving left and right
+     */
     public void reverse_x() {
         velocity_x *= -1;
     }
 
+    /**
+     * Control the ball moving up and down
+     */
     public void reverse_y() {
         velocity_y *= -1;
     }
 
+    /**
+     * Maintain the ball inside the scene
+     */
     public void checkCollisionScene(){
         boolean rightBorder = ball.getLayoutX() >= (600 - ball.getRadius());
         boolean leftBorder = ball.getLayoutX() <= (0 + ball.getRadius());
@@ -34,6 +46,11 @@ public class Ball {
         }
     }
 
+    /**
+     * Make the ball can bounce off the paddle
+     *
+     * @param paddle the paddle
+     */
     public void checkCollisionPaddle(Rectangle paddle){
 
         if(ball.getBoundsInParent().intersects(paddle.getBoundsInParent())){
@@ -72,7 +89,12 @@ public class Ball {
         }
     }
 
-    public Boolean checkCollisionBottomZone(){
+    /**
+     * Check if the ball touch the bottom zone
+     *
+     * @return true if touched; false otherwise
+     */
+    public boolean checkCollisionBottomZone(){
         if(ball.getLayoutY() >= (450 - ball.getRadius())){
             ball.setLayoutX(300);
             ball.setLayoutY(419);//180 for debug. 690
@@ -81,14 +103,24 @@ public class Ball {
         return false;
     }
 
-    public void moving(Boolean move) {
+    /**
+     * make the ball move
+     * @param move move if true. no move otherwise.
+     */
+    public void moving(boolean move) {
         if (move){
             ball.setLayoutX(ball.getLayoutX() + velocity_x);
             ball.setLayoutY(ball.getLayoutY() - velocity_y);
         }
     }
 
-    public void get_ball_movement(Double x, Double y) {
+    /**
+     * Get the ball movement
+     *
+     * @param x left and right
+     * @param y up and down
+     */
+    public void get_ball_movement(double x, double y) {
         velocity_x = x;
         velocity_y = y;
     }

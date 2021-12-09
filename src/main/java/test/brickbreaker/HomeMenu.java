@@ -8,8 +8,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The main
+ */
 public class HomeMenu extends Application {
 
+    /**
+     * Start the game
+     *
+     * @param stage get the stage
+     * @throws IOException when the scene can not be loaded
+     */
     @Override
     public void start(Stage stage) throws IOException {
 

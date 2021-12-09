@@ -25,6 +25,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for Game scene
+ */
 public class GameBoardController implements Initializable {
 
     private final Brick brick = new Brick(this);
@@ -40,7 +43,7 @@ public class GameBoardController implements Initializable {
     private int paddle_speed;
     private Character start_key = null;
 
-    private int level = 1;//3 for debugging. release is 1
+    private int level = 1;
     private boolean collided = false;
     private boolean paused = false;
     private Character pause_key = null;
@@ -48,7 +51,7 @@ public class GameBoardController implements Initializable {
 
     private final BooleanProperty aPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
-    private Boolean start_pressed = false;
+    private boolean start_pressed = false;
 
     @FXML
     private Circle circle;
@@ -73,13 +76,19 @@ public class GameBoardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         timer.start();
-        key_input_Setup();
+        keyInputSetup();
         brick.GenerateBrick();
         ball = new Ball(circle);
         paddle.setLayoutX(300 - paddle.getWidth()/2);
     }
 
-    public boolean CheckBrickCollision(Rectangle brick) {
+    /**
+     * Check if the ball touch a brick
+     *
+     * @param brick the brick
+     * @return true if touched. false otherwise
+     */
+    public boolean checkBrickCollision(Rectangle brick) {
 
         if (circle.getBoundsInParent().intersects(brick.getBoundsInParent()) && !collided){
 
@@ -175,7 +184,7 @@ public class GameBoardController implements Initializable {
                     heart2.setVisible(false);
                 }
                 if (ball_count == 0) {
-                    GameOver();
+                    gameOver();
                 }
             }
 
@@ -196,7 +205,7 @@ public class GameBoardController implements Initializable {
             }
 
             if (!bricks.isEmpty()){
-                bricks.removeIf(brick -> CheckBrickCollision(brick));
+                bricks.removeIf(brick -> checkBrickCollision(brick));
             } else {
                 ball.moving(false);
                 start_pressed = false;
@@ -211,7 +220,10 @@ public class GameBoardController implements Initializable {
         }
     };
 
-    public void NextLevel() {
+    /**
+     * Showed when player clear a level
+     */
+    public void nextLevel() {
 
         if (blitz_mode) {
             if (paddle.getWidth() > 60) {
@@ -235,7 +247,10 @@ public class GameBoardController implements Initializable {
         nextLevel.setVisible(false);
     }
 
-    public void key_input_Setup(){
+    /**
+     * Get the key input of player
+     */
+    public void keyInputSetup(){
         scene.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.A) {
                 aPressed.set(true);
@@ -277,6 +292,9 @@ public class GameBoardController implements Initializable {
         });
     }
 
+    /**
+     * Pause and resume game
+     */
     public void paused() {
         paused = !paused;
         if(paused) {
@@ -294,13 +312,16 @@ public class GameBoardController implements Initializable {
         }
     }
 
-    public void GameOver() {
+    /**
+     * Game over
+     */
+    public void gameOver() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("GameOver.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) this.scene.getScene().getWindow();
             GameOverController controller = fxmlLoader.getController();
-            controller.high_score(score);
+            controller.get_score(score);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
@@ -309,6 +330,12 @@ public class GameBoardController implements Initializable {
         }
     }
 
+    /**
+     * Check the status of the brick
+     *
+     * @param brick the brick
+     * @return number of hits left for the brick to break
+     */
     public int  getBrickState(Rectangle brick) {
         int HP = 3;
         if (brick.getFill() == Color.ORANGE) HP = 2;
@@ -316,7 +343,12 @@ public class GameBoardController implements Initializable {
         return HP;
     }
 
-    public void get_choice(Integer choice) {
+    /**
+     * Get the user choice
+     *
+     * @param choice player choice
+     */
+    public void getChoice(Integer choice) {
         switch (choice) {
             case 1:
                 paddle.setWidth(150);
@@ -361,6 +393,11 @@ public class GameBoardController implements Initializable {
         }
     }
 
+    /**
+     * Leave the game
+     *
+     * @param event require to get the stage for the scene
+     */
     public void leave(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Leave");
@@ -380,14 +417,29 @@ public class GameBoardController implements Initializable {
         }
     }
 
+    /**
+     * Get the level
+     *
+     * @return player current level
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     * Get the brick
+     *
+     * @return the brick
+     */
     public ArrayList<Rectangle> getBricks() {
         return bricks;
     }
 
+    /**
+     * Get the scene
+     *
+     * @return the scene
+     */
     public AnchorPane getScene() {
         return scene;
     }

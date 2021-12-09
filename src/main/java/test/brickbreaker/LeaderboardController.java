@@ -15,10 +15,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+/**
+ * Controller for leaderboard scene
+ */
 public class LeaderboardController implements Initializable {
 
 
@@ -28,13 +30,24 @@ public class LeaderboardController implements Initializable {
     @FXML
     private ListView<String> listView;
 
+    /**
+     * Fill up the list view with data acquire from get_leaderboard()
+     *
+     * @param url require for the method to initialize
+     * @param resourceBundle require for the method to initialize
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Leaderboard();
-        System.out.println(list);
+        get_leaderboard();
         listView.getItems().addAll(list);
     }
 
+    /**
+     * Return to the game menu
+     *
+     * @param event require to get the stage for the scene
+     * @throws IOException when the scene can not be loaded
+     */
     public void back(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
@@ -45,7 +58,10 @@ public class LeaderboardController implements Initializable {
         stage.show();
     }
 
-    public void Leaderboard() {
+    /**
+     * Get the data of the leaderboard
+     */
+    public void get_leaderboard() {
         try {
             File myObj = new File("src/main/resources/Leaderboard.txt");
             if (myObj.createNewFile()) {

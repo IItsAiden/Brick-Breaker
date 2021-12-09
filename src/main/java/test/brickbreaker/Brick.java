@@ -3,6 +3,9 @@ package test.brickbreaker;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * The Brick class
+ */
 public class Brick {
     private final GameBoardController gameBoardController;
 
@@ -10,6 +13,9 @@ public class Brick {
         this.gameBoardController = gameBoardController;
     }
 
+    /**
+     * Generate the brick
+     */
     public void GenerateBrick() {
 
         int height = 0;

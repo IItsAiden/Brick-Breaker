@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for difficulty scene
+ */
 public class DifficultyController {
 
     private int choice = 3;
@@ -21,6 +24,9 @@ public class DifficultyController {
     @FXML
     private Label Description, paddle, ball, multiplier;
 
+    /**
+     * Get the difficulty
+     */
     public void get_difficulty() {
 
         if (rb1.isSelected()){
@@ -60,6 +66,12 @@ public class DifficultyController {
         }
     }
 
+    /**
+     * Go to the tutorial scene
+     *
+     * @param event require to get the stage for the scene
+     * @throws IOException when the scene can not be loaded
+     */
     public void next(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("Tutorial.fxml"));
