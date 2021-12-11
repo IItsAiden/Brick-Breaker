@@ -33,12 +33,12 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <TextField fx:id="textField" layoutX="109.0" layoutY="243.0" prefHeight="45.0" prefWidth="168.0">
+      <TextField fx:id="textField" layoutX="109.0" layoutY="243.0" prefHeight="45.0" prefWidth="168.0" visible="false">
          <font>
             <Font size="21.0" />
          </font>
       </TextField>
-      <Label layoutX="109.0" layoutY="208.0" text="Enter Username">
+      <Label fx:id="username" layoutX="109.0" layoutY="208.0" text="Enter Username" visible="false">
          <font>
             <Font size="24.0" />
          </font>

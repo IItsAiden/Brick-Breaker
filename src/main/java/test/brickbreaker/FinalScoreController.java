@@ -34,7 +34,7 @@ public class FinalScoreController implements Initializable {
     private ListView<String> listView;
 
     @FXML
-    private Label label, invalid, nice;
+    private Label label, invalid, nice, username;
 
     @FXML
     private TextField textField;
@@ -59,6 +59,8 @@ public class FinalScoreController implements Initializable {
         if (save) {
             button.setText("Save");
             nice.setText("Congraz!! New High Score!");
+            username.setVisible(true);
+            textField.setVisible(true);
         }
     }
 
