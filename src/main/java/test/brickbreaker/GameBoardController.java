@@ -45,9 +45,9 @@ public class GameBoardController implements Initializable {
 
     private int level = 1;
     private boolean collided = false;
+    private boolean blitz_mode = false;
     private boolean paused = false;
     private Character pause_key = null;
-    private boolean blitz_mode = false;
 
     private final BooleanProperty aPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
@@ -228,8 +228,19 @@ public class GameBoardController implements Initializable {
         if (blitz_mode) {
             if (paddle.getWidth() > 60) {
                 paddle.setWidth(paddle.getWidth() - 30);
-            }
-            if (paddle.getWidth() <= 60) {
+                if (paddle.getWidth() == 120) {
+                    paddle_speed = 4;
+                    multiplier = 150;
+                    velocity_x = 2;
+                    velocity_y = 3;
+                }
+                if (paddle.getWidth() == 90) {
+                    paddle_speed = 5;
+                    multiplier = 200;
+                    velocity_x = 3;
+                    velocity_y = 4;
+                }
+            } else if (paddle.getWidth() <= 60) {
                 paddle_speed++;
                 ball.velocity_x++;
                 ball.velocity_y++;
