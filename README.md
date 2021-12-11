@@ -11,6 +11,8 @@ More information about the [Brick Breaker](https://heroconcept.com/a-brief-histo
 
 - The code has been converted into Javafx.
 
+- MVC has been implemented with View being the [name]fxml, Controller being the [name]Controller.java, and Model being [name].java.
+
 - Portion of GUI related code has been converted to fxml.
 
 - The different brick type classes have been merge into brick.java for easier and simpler maintenance.
