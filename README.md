@@ -61,4 +61,4 @@ More information about the [Brick Breaker](https://heroconcept.com/a-brief-histo
 
 ---
 
- The [GitHub repository](https://heroconcept.com/a-brief-history-of-brick-breaker-video-games/) of this project.
+ The [GitHub repository](https://github.com/IItsAiden/COMP2042_CW_hfyyv1) of this project.
