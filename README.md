@@ -61,4 +61,13 @@ More information about the [Brick Breaker](https://heroconcept.com/a-brief-histo
 
 ---
 
+### Git history
+![Screenshot (115)](https://user-images.githubusercontent.com/79147150/145801294-0e425b89-d95f-4550-be9d-f8ac05d92deb.png)
+![Screenshot (116)](https://user-images.githubusercontent.com/79147150/145801334-bba5196a-34cd-4af2-9e11-3926ae793e1e.png)
+![Screenshot (117)](https://user-images.githubusercontent.com/79147150/145801339-ca1b61d4-bdd5-4faf-90e9-935f413489b2.png)
+![Screenshot (118)](https://user-images.githubusercontent.com/79147150/145801355-64f3d12f-e863-4fc7-b995-8c4b4cf72fc4.png)
+![Screenshot (119)](https://user-images.githubusercontent.com/79147150/145801422-3614d374-b5cd-4316-88f9-cd0ea5efb352.png)
+![Screenshot (120)](https://user-images.githubusercontent.com/79147150/145816316-518a371c-cb28-4555-a8b9-57500d2ad611.png)
+![Screenshot (121)](https://user-images.githubusercontent.com/79147150/145816332-cbc029bd-1464-4859-8010-aae744749a06.png)
+
  The [GitHub repository](https://github.com/IItsAiden/COMP2042_CW_hfyyv1) of this project.
