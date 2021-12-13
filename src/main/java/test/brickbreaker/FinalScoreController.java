@@ -90,14 +90,14 @@ public class FinalScoreController implements Initializable {
      * @throws IOException when the scene can not be loaded
      */
     public void Next(ActionEvent event) throws IOException {
-        if (textField.getText() == null || textField.getText().trim().isEmpty()) {
-            invalid.setText("Please enter username");
-            invalid.setVisible(true);
-        } else if (textField.getText().contains(",")) {
-            invalid.setText("Username can not contain ,");
-            invalid.setVisible(true);
-        } else {
-            if (save) {
+        if (save) {
+            if (textField.getText() == null || textField.getText().trim().isEmpty()) {
+                invalid.setText("Please enter username");
+                invalid.setVisible(true);
+            } else if (textField.getText().contains(",")) {
+                invalid.setText("Username can not contain ,");
+                invalid.setVisible(true);
+            } else {
                 add_score();
                 try {
                     PrintWriter myWriter = new PrintWriter("src/main/resources/Leaderboard.txt");
@@ -110,19 +110,18 @@ public class FinalScoreController implements Initializable {
                 }
                 FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.setResizable(false);
-                stage.show();
-            } else {
-
-                FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);
                 stage.setResizable(false);
                 stage.show();
             }
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(HomeMenu.class.getResource("HomeMenu.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
         }
     }
 
