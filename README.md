@@ -58,3 +58,7 @@ More information about the [Brick Breaker](https://heroconcept.com/a-brief-histo
 - Slight increase in the size of ball to make it more trackable by the eyes.
 
 - Visual improvement on the pause game screen. The pause screen is now clearer and the option in the pause screen is much more visible.
+
+---
+
+ The [GitHub repository](https://heroconcept.com/a-brief-history-of-brick-breaker-video-games/) of this project.
